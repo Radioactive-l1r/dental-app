@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.Dental" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.Dental" parent="Theme.MaterialComponents.Light.NoActionBar.Bridge">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/purple_500</item>
         <item name="colorPrimaryVariant">#7490F3E6</item>
@@ -15,5 +15,6 @@
         <item name="android:windowLightNavigationBar">true</item>
         <item name="android:navigationBarColor">#7490F3E6</item>
         <!-- Customize your theme here. -->
+        <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
     </style>
 </resources>
