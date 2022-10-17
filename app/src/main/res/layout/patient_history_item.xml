@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/light"
+    android:elevation="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="100dp">
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/delete"
+            android:layout_margin="5dp"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_del"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></ImageView>
+        <TextView
+            android:textStyle="bold"
+            android:id="@+id/time_date"
+            android:textColor="@color/black"
+           android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="5dp"
+            android:text="12/22/12 - 12:21 pm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:layout_below="@+id/time_date"
+            android:id="@+id/problem"
+            android:textColor="@color/black"
+            android:layout_marginHorizontal="10dp"
+            android:text="dasd dasd  fasd asdda dsa  adasd dsada da das das das das da sdsadasda"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </TextView>
+        <TextView
+            android:id="@+id/review"
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="10dp"
+
+            android:textColor="@color/white"
+            android:background="@drawable/text_bg"
+            android:text="Leave a review"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginHorizontal="5dp"
+
+            android:textColor="@color/high"
+            android:layout_alignParentEnd="true"
+            android:text="more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+
+</androidx.cardview.widget.CardView>

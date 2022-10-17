@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/kid"
+            android:layout_below="@+id/mail"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/age_deselect"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="Kid"
+            android:textColor="@color/teal_700"
+            android:textStyle="bold"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="30%"></TextView>
+        <TextView
+            android:id="@+id/adult"
+           android:layout_toRightOf="@+id/kid"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/age_deselect"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="Adult"
+            android:textColor="@color/teal_700"
+            android:textStyle="bold"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="30%"></TextView>
+
+        <TextView
+            android:id="@+id/elderly"
+            android:layout_toRightOf="@+id/adult"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/age_deselect"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="Elderly"
+            android:textColor="@color/teal_700"
+            android:textStyle="bold"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="30%"></TextView>
+
+        <TextView
+            android:layout_below="@+id/kid"
+            android:id="@+id/date"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="dd/mm/yy"
+            android:drawableRight="@drawable/ic_cal"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="40%" />
+        <TextView
+            android:layout_toRightOf="@+id/date"
+            android:layout_below="@+id/kid"
+            android:id="@+id/time"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="hh:mm"
+            android:drawableRight="@drawable/ic_time"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            app:layout_heightPercent="5%"
+            app:layout_widthPercent="40%"></TextView>
+        <TextView
+            android:id="@+id/stat"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:text="Tell us your problem"
+            android:layout_below="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"></TextView>
+        <EditText
+            android:id="@+id/problem"
+            android:background="@drawable/edit_t_bg"
+            android:layout_marginVertical="10dp"
+            android:layout_marginHorizontal="10dp"
+            android:textColor="@color/black"
+
+            android:hint="Describe your problem here.."
+            android:layout_below="@+id/stat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></EditText>
+        <TextView
+            android:layout_below="@+id/problem"
+            android:id="@+id/book"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/text_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="Book Appointment"
+            android:textSize="20dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></TextView>
+
+
+
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+
+</androidx.cardview.widget.CardView>

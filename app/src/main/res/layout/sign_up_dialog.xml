@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/name"
+           android:layout_marginHorizontal="30dp"
+                android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="name"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></EditText>
+        <EditText
+            android:layout_below="@+id/name"
+            android:id="@+id/phno"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="phno"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></EditText>
+        <EditText
+            android:layout_below="@+id/phno"
+            android:id="@+id/mail"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="mail"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></EditText>
+
+        <EditText
+            android:id="@+id/password"
+            android:layout_below="@+id/mail"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/edit_t_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:hint="password"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></EditText>
+        <TextView
+            android:layout_below="@+id/password"
+            android:id="@+id/sign_up"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/text_bg"
+            android:elevation="10dp"
+            android:gravity="center"
+           android:text="SIGN UP"
+
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="100%"></TextView>
+
+
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+
+</androidx.cardview.widget.CardView>
