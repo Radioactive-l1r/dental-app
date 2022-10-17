@@ -16,8 +16,7 @@
         <item name="android:navigationBarColor">#7490F3E6</item>
         <!-- Customize your theme here. -->
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
-        ///dadassda
-        das
-        
+
+
     </style>
 </resources>
