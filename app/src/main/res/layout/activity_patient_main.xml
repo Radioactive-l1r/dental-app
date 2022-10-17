@@ -10,6 +10,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
+
+
         <TextView
             android:layout_marginHorizontal="10dp"
             android:id="@+id/name"
@@ -19,7 +23,7 @@
             android:text="Rocky bhai"
             android:textColor="#00BFA5"
             android:textStyle="bold"
-            app:layout_heightPercent="4%"></TextView>
+            app:layout_heightPercent="4%"/>
 
         <ImageView
             android:id="@+id/log_out"
@@ -27,9 +31,156 @@
             android:layout_marginHorizontal="5dp"
             android:src="@drawable/ic_logout"
             app:layout_heightPercent="4%"
-            app:layout_widthPercent="8%"></ImageView>
+            app:layout_widthPercent="8%"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/view"
+            android:layout_below="@+id/name"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/orthodontics"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/orthodontics"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+            <TextView
+                android:id="@+id/oral_med_rad"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/oral_medicine_and_radiology"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/pub_health_dent"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/public_health_dentistry"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/prosthodontics"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/prosthodontics"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/oral_path"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/oral_pathology"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/oral_max_sur"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/oral_maxillofacial_surgery"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/pedodontics"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/pedodontics"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/cons_endo"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/conservative_and_endodontics"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+            <TextView
+                android:id="@+id/peridontics"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_gravity="center"
+                android:background="@drawable/action_buttons"
+                android:fontFamily="@font/urbanist_bold"
+                android:text="@string/periodontics"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/primary"
+                android:textSize="24sp"
+                android:layout_marginBottom="20dp"/>
+
+
+
+
+
+
+        </LinearLayout>
+
         <View
             android:layout_above="@+id/book"
+            android:id="@+id/view"
             android:elevation="1dp"
             android:background="@color/white"
             android:layout_width="match_parent"
@@ -39,7 +190,7 @@
         <TextView
             android:layout_alignParentLeft="true"
             android:id="@+id/history"
-           android:layout_margin="5dp"
+            android:layout_margin="5dp"
             android:layout_alignParentBottom="true"
             android:textSize="20dp"
             android:textStyle="bold"
@@ -48,7 +199,7 @@
 
             android:text="HISTORY"
             app:layout_widthPercent="48%"
-            app:layout_heightPercent="7%"></TextView>
+            app:layout_heightPercent="7%"/>
 
         <TextView
             android:id="@+id/book"
@@ -65,7 +216,7 @@
             android:textSize="20dp"
             android:textStyle="bold"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="48%"></TextView>
+            app:layout_widthPercent="48%"/>
     </androidx.percentlayout.widget.PercentRelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

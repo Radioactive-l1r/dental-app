@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -33,6 +34,9 @@ import java.util.Calendar;
 import java.util.Random;
 
 public class patient_main extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener {
+
+
+
     String ip;
     String number_s;
     TextView name,book,history;

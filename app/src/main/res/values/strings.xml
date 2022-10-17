@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">dental</string>
+    <string name="login">Login</string>
+    <string name="doctor_patient_login">Doctor/Patient Login</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? SIGN UP</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="forgot_password">Forgot password?</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="full_name">Full Name</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="adult">Adult</string>
+    <string name="kid">Kid</string>
+    <string name="elderly">Elderly</string>
+    <string name="describe_your_problem_here">Describe your problem here..</string>
+    <string name="book_appointment">Book Appointment</string>
+    <string name="tell_us_your_problem">Tell us your problem</string>
+    <string name="history">HISTORY</string>
+    <string name="book">BOOK</string>
+    <string name="rocky_bhai">Rocky Bhai</string>
+    <string name="orthodontics">Orthodontics</string>
+    <string name="oral_medicine_and_radiology">Oral Medicine and Radiology</string>
+    <string name="public_health_dentistry">Public Health Dentistry</string>
+    <string name="prosthodontics">Prosthodontics</string>
+    <string name="oral_pathology">Oral Pathology</string>
+    <string name="oral_maxillofacial_surgery">Oral Maxillofacial Surgery</string>
+    <string name="pedodontics">Pedodontics</string>
+    <string name="conservative_and_endodontics">Conservative and Endodontics</string>
+    <string name="periodontics">Periodontics</string>
 </resources>

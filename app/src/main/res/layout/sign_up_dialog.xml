@@ -5,77 +5,101 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
+
+
     <androidx.percentlayout.widget.PercentRelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"
+        android:paddingBottom="20dp">
         <EditText
             android:id="@+id/name"
-           android:layout_marginHorizontal="30dp"
-                android:layout_marginVertical="10dp"
-            android:background="@drawable/edit_t_bg"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:hint="name"
+            android:layout_marginHorizontal="30dp"
+            android:layout_marginVertical="10dp"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/input_field"
+            android:elevation="2dp"
+            android:paddingStart="10dp"
+            android:hint="@string/full_name"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:inputType="text"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"></EditText>
+            app:layout_widthPercent="100%"/>
         <EditText
             android:layout_below="@+id/name"
             android:id="@+id/phno"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/edit_t_bg"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:hint="phno"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/input_field"
+            android:elevation="2dp"
+            android:paddingStart="10dp"
+            android:hint="@string/phone_number"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:inputType="number"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"></EditText>
+            app:layout_widthPercent="100%"/>
         <EditText
             android:layout_below="@+id/phno"
             android:id="@+id/mail"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/edit_t_bg"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:hint="mail"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/input_field"
+            android:elevation="2dp"
+            android:paddingStart="10dp"
+            android:hint="@string/email"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:inputType="textEmailAddress"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"></EditText>
-
+            app:layout_widthPercent="100%"/>
         <EditText
             android:id="@+id/password"
             android:layout_below="@+id/mail"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/edit_t_bg"
-            android:elevation="10dp"
-            android:gravity="center"
-            android:hint="password"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/input_field"
+            android:elevation="2dp"
+            android:paddingStart="10dp"
+            android:hint="@string/password"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:inputType="textPassword"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"></EditText>
+            app:layout_widthPercent="100%"/>
         <TextView
             android:layout_below="@+id/password"
             android:id="@+id/sign_up"
             android:layout_marginHorizontal="30dp"
             android:layout_marginVertical="10dp"
-            android:background="@drawable/text_bg"
-            android:elevation="10dp"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:background="@drawable/textview_button"
+            android:textSize="20sp"
+            android:elevation="2dp"
             android:gravity="center"
-           android:text="SIGN UP"
-
-            android:textColor="@color/white"
+            android:text="@string/sign_up"
+            android:textColor="@color/black"
             android:textStyle="bold"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"></TextView>
-
+            app:layout_widthPercent="100%"/>
 
     </androidx.percentlayout.widget.PercentRelativeLayout>
 
-</androidx.cardview.widget.CardView>
+
+
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+

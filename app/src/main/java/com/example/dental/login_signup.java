@@ -9,9 +9,11 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,10 @@ import java.util.Map;
 
 public class login_signup extends AppCompatActivity {
 
-    TextView sign_up,login;
+
+
+    TextView sign_up;
+    Button login;
     EditText phno,password;
     String ip;
     String name_s,phno_s,mail_s,password_s;

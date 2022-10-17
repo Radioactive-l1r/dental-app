@@ -3,6 +3,17 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/drawable/age_deselect.xml" value="0.1065" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/drawable/input_field.xml" value="0.1065" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/drawable/textview_button.xml" value="0.1065" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/font/urbanic_font.xml" value="0.19722222222222222" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/activity_login_signup.xml" value="0.10810810810810811" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/activity_patient_history.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/activity_patient_main.xml" value="0.2" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/book_dialog.xml" value="0.11428571428571428" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/patient_history_item.xml" value="0.22826086956521738" />
+        <entry key="..\:/Users/lenovo/AndroidStudioProjects/dental-app/app/src/main/res/layout/sign_up_dialog.xml" value="0.2" />
         <entry key="..\:/pro/dental/app/src/main/res/drawable/age_deselect.xml" value="0.241" />
         <entry key="..\:/pro/dental/app/src/main/res/drawable/edit_t_bg.xml" value="0.222" />
         <entry key="..\:/pro/dental/app/src/main/res/drawable/text_bg.xml" value="0.195" />
