@@ -27,4 +27,7 @@
     <string name="pedodontics">Pedodontics</string>
     <string name="conservative_and_endodontics">Conservative and Endodontics</string>
     <string name="periodontics">Periodontics</string>
+    <string name="stat2">Give Your Feedback</string>
+    <string name="type_here">Type here</string>
+    <string name="feedSubmit">Submit</string>
 </resources>

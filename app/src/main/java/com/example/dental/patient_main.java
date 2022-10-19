@@ -21,6 +21,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -46,6 +47,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     TextView bookd,date,time;
     TimePickerDialog timePickerDialog;
     int CalendarHour, CalendarMinute;
+    ImageView logOut;
 
     ArrayList<String> id_list=new ArrayList<>();
     @Override
@@ -79,6 +81,14 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 i.putExtra("number", number_s);
                 i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivity(i);
+            }
+        });
+
+        logOut = findViewById(R.id.log_out);
+        logOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
             }
         });
 
@@ -377,6 +387,13 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 opp_id_S=id;
             }
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), login_signup.class));
+        overridePendingTransition(0,0);
     }
 
 

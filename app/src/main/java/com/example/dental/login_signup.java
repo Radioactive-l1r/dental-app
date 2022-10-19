@@ -39,12 +39,12 @@ public class login_signup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
 
         phno=findViewById(R.id.phno);
         password=findViewById(R.id.password);
-
 
         sign_up=findViewById(R.id.sign_up);
         sign_up.setOnClickListener(new View.OnClickListener() {
@@ -82,9 +82,7 @@ public class login_signup extends AppCompatActivity {
                             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
 
-                            SharedPreferences sharedPref;
-                            sharedPref = getSharedPreferences("myPref", MODE_PRIVATE);
-                            sharedPref.edit().putString("phno", phno_s).commit();
+                            sharedPreferences.edit().putString("phno", phno_s).commit();
                             startActivity(i);
                         }
                         else
@@ -94,7 +92,9 @@ public class login_signup extends AppCompatActivity {
                 }
             }
         });
-        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
+        sharedPreferences.edit().putString("phno", "").commit();
+        phno.setText("");
+        password.setText("");
         ip=sharedPreferences.getString("ip", "");
         common.create_pd(login_signup.this);
 

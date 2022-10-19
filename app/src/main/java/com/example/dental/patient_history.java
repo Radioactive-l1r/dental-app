@@ -1,18 +1,26 @@
 package com.example.dental;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -20,6 +28,7 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -27,7 +36,7 @@ public class patient_history extends AppCompatActivity
 {
   TextView name;
   String ip,number_s;
-  String opp_id_s;
+  String opp_id_s, feed_back_s;
 
   adapter Adapeter;
   ArrayList<model> modelArrayList;
@@ -129,6 +138,9 @@ public class patient_history extends AppCompatActivity
             {//DELETE FROM `appointment` WHERE opp_id='qwwq';
                 common.send_req(ip,"c_qry=DELETE FROM appointment where opp_id='"+opp_id_s+"'");
             }
+          else if(action.contains("feedback")){
+              common.send_req(ip, "c_qry=UPDATE appointment SET feedback='"+feed_back_s+"' where opp_id='"+opp_id_s+"'");
+            }
             return null;
         }
 
@@ -191,13 +203,14 @@ public class patient_history extends AppCompatActivity
         {
             TextView date_time,problem;
             ImageView delete;
+            TextView feedback;
             public MyViewHolder(@NonNull View itemView)
             {
                 super(itemView);
                 date_time=itemView.findViewById(R.id.time_date);
                 problem=itemView.findViewById(R.id.problem);
                 delete=itemView.findViewById(R.id.delete);
-
+                feedback=itemView.findViewById(R.id.review);
             }
         }
         @NonNull
@@ -208,7 +221,7 @@ public class patient_history extends AppCompatActivity
         }
 
         @Override
-        public void onBindViewHolder(@NonNull adapter.MyViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
             String da=modelArrayList.get(position).getDate()+" - "+modelArrayList.get(position).getTime();
             holder.date_time.setText(da);
@@ -221,6 +234,13 @@ public class patient_history extends AppCompatActivity
                      opp_id_s=modelArrayList.get(position).getId().toString();
                      Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
                      new bg("delete").execute();
+                 }
+             });
+
+             holder.feedback.setOnClickListener(new View.OnClickListener() {
+                 @Override
+                 public void onClick(View view) {
+                     feedback_dialog();
                  }
              });
 
@@ -241,4 +261,31 @@ public class patient_history extends AppCompatActivity
         overridePendingTransition(0,0);
     }
 
+    void feedback_dialog() {
+
+        Dialog d = new Dialog(this);
+        d.setContentView(R.layout.feedback_dialog);
+        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        EditText feed;
+        TextView feedSubmit;
+        feed = d.findViewById(R.id.feedback);
+        feedSubmit = d.findViewById(R.id.feedSubmit);
+
+        feedSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                feed_back_s = feed.getText().toString();
+                if (TextUtils.isEmpty(feed_back_s)) {
+                    Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    new bg("feedback").execute();
+                    Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT).show();
+                    d.dismiss();
+                }
+            }
+        });
+
+        d.show();
+    }
 }
