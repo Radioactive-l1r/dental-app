@@ -123,7 +123,7 @@ public class patient_history extends AppCompatActivity
                         String problem_=jsonObj.getString("problem");
                         String d_advice_= jsonObj.getString("d_advice");
                         String feed_back=jsonObj.getString("feedback");
-                        modelArrayList.add(new model(id,date_,time_,problem_,d_advice_));
+                        modelArrayList.add(new model(id,date_,time_,problem_,d_advice_,feed_back));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -155,14 +155,15 @@ public class patient_history extends AppCompatActivity
 
     class model
     {
-        private  String id,date,time,problem,d_advice;
+        private  String id,date,time,problem,d_advice,feedback_value;
 
-        model(String id, String date, String time, String problem, String d_advice) {
+        model(String id, String date, String time, String problem, String d_advice, String feedback_value) {
             this.id = id;
             this.date = date;
             this.time = time;
             this.problem = problem;
             this.d_advice = d_advice;
+            this.feedback_value = feedback_value;
 
         }
 
@@ -186,6 +187,10 @@ public class patient_history extends AppCompatActivity
             return d_advice;
         }
 
+        public String getFeedback_value() {
+            return feedback_value;
+        }
+
     }
 
     class adapter extends RecyclerView.Adapter<adapter.MyViewHolder>
@@ -200,7 +205,7 @@ public class patient_history extends AppCompatActivity
         {
             TextView date_time,problem;
             ImageView delete;
-            TextView feedback;
+            TextView feedback, moreInfo;
             public MyViewHolder(@NonNull View itemView)
             {
                 super(itemView);
@@ -208,6 +213,7 @@ public class patient_history extends AppCompatActivity
                 problem=itemView.findViewById(R.id.problem);
                 delete=itemView.findViewById(R.id.delete);
                 feedback=itemView.findViewById(R.id.review);
+                moreInfo=itemView.findViewById(R.id.moreInfo);
             }
         }
         @NonNull
@@ -223,24 +229,38 @@ public class patient_history extends AppCompatActivity
             String da=modelArrayList.get(position).getDate()+" - "+modelArrayList.get(position).getTime();
             holder.date_time.setText(da);
             holder.problem.setText(modelArrayList.get(position).getProblem());
-             String few= holder.problem.getText().toString();
-
-             holder.delete.setOnClickListener(new View.OnClickListener() {
+            String few= holder.problem.getText().toString();
+            String feed_back_value = modelArrayList.get(position).getFeedback_value();
+            if(!feed_back_value.isEmpty()){
+                holder.feedback.setEnabled(false);
+                holder.feedback.setText("");
+                holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
+            }
+            holder.delete.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
                      opp_id_s=modelArrayList.get(position).getId().toString();
                      Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
                      new bg("delete").execute();
                  }
-             });
+            });
 
-             holder.feedback.setOnClickListener(new View.OnClickListener() {
+            holder.feedback.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
                      opp_id_s=modelArrayList.get(position).getId().toString();
                      feedback_dialog(opp_id_s);
                  }
-             });
+            });
+
+            holder.moreInfo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+
+                    Intent intent = new Intent(getApplicationContext(), medical_history.class);
+                    startActivity(intent);
+                }
+            });
 
         }
 

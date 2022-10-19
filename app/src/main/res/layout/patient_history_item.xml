@@ -47,16 +47,18 @@
             android:text="Leave a review"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"></TextView>
+
         <TextView
-            android:layout_marginBottom="5dp"
+            android:id="@+id/moreInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="5dp"
-
-            android:textColor="@color/high"
-            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp"
             android:text="more"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"></TextView>
+            android:textColor="@color/high"></TextView>
     </androidx.percentlayout.widget.PercentRelativeLayout>
 
 </androidx.cardview.widget.CardView>

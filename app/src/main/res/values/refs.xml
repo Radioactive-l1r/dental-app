@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <drawable name="checkbox_on_background">@android:drawable/checkbox_on_background</drawable>
+</resources>
