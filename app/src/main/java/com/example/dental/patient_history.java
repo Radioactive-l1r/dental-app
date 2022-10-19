@@ -1,7 +1,6 @@
 package com.example.dental;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +12,6 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -28,7 +26,6 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 
@@ -240,7 +237,8 @@ public class patient_history extends AppCompatActivity
              holder.feedback.setOnClickListener(new View.OnClickListener() {
                  @Override
                  public void onClick(View view) {
-                     feedback_dialog();
+                     opp_id_s=modelArrayList.get(position).getId().toString();
+                     feedback_dialog(opp_id_s);
                  }
              });
 
@@ -261,7 +259,7 @@ public class patient_history extends AppCompatActivity
         overridePendingTransition(0,0);
     }
 
-    void feedback_dialog() {
+    void feedback_dialog(String opp_id) {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.feedback_dialog);
@@ -279,6 +277,7 @@ public class patient_history extends AppCompatActivity
                 if (TextUtils.isEmpty(feed_back_s)) {
                     Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT).show();
                 } else {
+                    opp_id_s = opp_id;
                     new bg("feedback").execute();
                     Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT).show();
                     d.dismiss();
