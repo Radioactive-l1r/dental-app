@@ -66,7 +66,7 @@ public class common {
             HttpResponse response=httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
             String result = EntityUtils.toString(entity);
-            String obj=result.replace("[","").replace("]","");
+//            String obj=result.replace("[","").replace("]","");
 
             jsonArr = new JSONArray(result);
 

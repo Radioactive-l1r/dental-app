@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">dental</string>
     <string name="login">Login</string>
-    <string name="doctor_patient_login">Doctor/Patient Login</string>
+    <string name="doctor_patient_login">User Login</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? SIGN UP</string>
     <string name="phone_number">Phone Number</string>
     <string name="forgot_password">Forgot password?</string>

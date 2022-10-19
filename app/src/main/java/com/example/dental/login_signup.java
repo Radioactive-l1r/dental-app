@@ -9,7 +9,6 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.SpannableString;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -51,9 +50,10 @@ public class login_signup extends AppCompatActivity {
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            open_sign_dialof();
+            open_sign_dialog();
             }
         });
+
         login=findViewById(R.id.login);
         login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,17 +67,17 @@ public class login_signup extends AppCompatActivity {
                 }
                 else if(!phone_list.contains(phno_s))
                 {
-                    Toast.makeText(login_signup.this, "user does n't exist", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                        /**check if pasword matches*/
+                        /* check if pasword matches*/
                         String map_pas=ph_pas_map.get(phno_s);
                         if(password_s.equals(map_pas))
                         {
                             Toast.makeText(login_signup.this, "logged in", Toast.LENGTH_SHORT).show();
                             Intent i = new Intent(login_signup.this, patient_main.class);
-                            String strName = null;
+//                            String strName = null;
                             i.putExtra("number", phno_s);
                             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
@@ -89,10 +89,9 @@ public class login_signup extends AppCompatActivity {
                         }
                         else
                         {
-                            Toast.makeText(login_signup.this, "check password!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
                         }
                 }
-
             }
         });
         SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
@@ -103,7 +102,7 @@ public class login_signup extends AppCompatActivity {
 
     }
 
-    void open_sign_dialof()
+    void open_sign_dialog()
     {
         Dialog d=new Dialog(this);
         d.setContentView(R.layout.sign_up_dialog);
@@ -112,7 +111,7 @@ public class login_signup extends AppCompatActivity {
         sign_up=d.findViewById(R.id.sign_up);
         name=d.findViewById(R.id.name);
         phno=d.findViewById(R.id.phno);
-        mail=d.findViewById(R.id.phno);
+        mail=d.findViewById(R.id.mail);
         password=d.findViewById(R.id.password);
         sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,9 +131,8 @@ public class login_signup extends AppCompatActivity {
                 }
                 else {
                     new bg("insert").execute();
+                    d.dismiss();
                 }
-
-                d.dismiss();
             }
         });
         d.show();
@@ -159,7 +157,7 @@ public class login_signup extends AppCompatActivity {
             if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM patient");
+                jsonArr = common.send_req(ip,"c_qry=SELECT * FROM patient");
                 phone_list.clear();
                 ph_pas_map.clear();
                 for (int i = 0; i < jsonArr.length(); i++)
@@ -173,10 +171,10 @@ public class login_signup extends AppCompatActivity {
                         String num_=jsonObj.getString("phno");
                         String password_=jsonObj.getString("password");
                         ph_pas_map.put(num_,password_);
-                        if(num_.equals("sa") && password_.equals("sa"))
-                        {
-                            Log.d("compared", "doInBackground: ");
-                        }
+//                        if(num_.equals("sa") && password_.equals("sa"))
+//                        {
+//                            Log.d("compared", "doInBackground: ");
+//                        }
                         phone_list.add(num_);
 
                         } catch (JSONException e) {

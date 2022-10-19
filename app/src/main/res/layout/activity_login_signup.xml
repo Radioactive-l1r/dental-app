@@ -10,7 +10,7 @@
         android:id="@+id/imageView"
         android:layout_width="124dp"
         android:layout_height="120dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -126,32 +126,12 @@
         />
 
     <TextView
-        android:id="@+id/forgot_psw"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/login"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="15dp"
-        android:elevation="10dp"
-        android:fontFamily="@font/urbanist_medium"
-        android:gravity="center"
-        android:text="@string/forgot_password"
-        android:textColor="@color/grey"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/login"
-         />
-
-    <TextView
         android:id="@+id/sign_up"
         android:layout_width="300dp"
         android:layout_height="45dp"
-        android:layout_marginTop="80dp"
         android:layout_below="@+id/login"
         android:layout_centerInParent="true"
+        android:layout_marginTop="10dp"
         android:elevation="10dp"
         android:fontFamily="@font/urbanist_bold"
         android:gravity="center"
@@ -163,9 +143,6 @@
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/login" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
