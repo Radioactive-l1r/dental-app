@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -36,8 +37,6 @@ import java.util.Random;
 
 public class patient_main extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener {
 
-
-
     String ip;
     String number_s;
     TextView name,book,history;
@@ -48,6 +47,9 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     TimePickerDialog timePickerDialog;
     int CalendarHour, CalendarMinute;
     ImageView logOut;
+    TextView orthodontics, pub_health_dent, oral_med_rad, pedodontics, oral_max_sur;
+    TextView oral_path, prosthodontics, peridontics, cons_endo;
+    Toast toast;
 
     ArrayList<String> id_list=new ArrayList<>();
     @Override
@@ -61,7 +63,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
         Bundle extras = getIntent().getExtras();
         number_s= sharedPreferences.getString("phno", "");
-        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
 
         calendar= Calendar.getInstance();
         name=findViewById(R.id.name);
@@ -92,7 +94,34 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             }
         });
 
+        orthodontics = findViewById(R.id.orthodontics);
+        oral_med_rad = findViewById(R.id.oral_med_rad);
+        pub_health_dent = findViewById(R.id.pub_health_dent);
+        prosthodontics = findViewById(R.id.prosthodontics);
+        oral_path = findViewById(R.id.oral_path);
+        oral_max_sur = findViewById(R.id.oral_max_sur);
+        pedodontics = findViewById(R.id.pedodontics);
+        cons_endo = findViewById(R.id.cons_endo);
+        peridontics = findViewById(R.id.peridontics);
+
+        orthodontics.setOnClickListener(view -> sendInfo(view));
+        oral_med_rad.setOnClickListener(view -> sendInfo(view));
+        pub_health_dent.setOnClickListener(view -> sendInfo(view));
+        prosthodontics.setOnClickListener(view -> sendInfo(view));
+        oral_path.setOnClickListener(view -> sendInfo(view));
+        oral_max_sur.setOnClickListener(view -> sendInfo(view));
+        pedodontics.setOnClickListener(view -> sendInfo(view));
+        peridontics.setOnClickListener(view -> sendInfo(view));
+        cons_endo.setOnClickListener(view -> sendInfo(view));
+
         new bg("name").execute();
+    }
+
+    void sendInfo(View view){
+        Intent intent = new Intent(patient_main.this, DepartmentInfo.class);
+        TextView dept = (TextView) view;
+        intent.putExtra("dept", dept.getText().toString());
+        startActivity(intent);
     }
 
     void booK_dialog()
@@ -179,7 +208,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 problem_S=problem.getText().toString();
                 if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
                 {
-                    Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else
                 {
@@ -187,8 +217,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                     new bg("insert").execute();
                     d.dismiss();
                 }
-
-                Toast.makeText(patient_main.this, ""+date_S, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(patient_main.this, ""+date_S, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -238,25 +267,17 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 CalendarHour = calendar.get(Calendar.HOUR_OF_DAY);
                 CalendarMinute = calendar.get(Calendar.MINUTE);
                 if (h == 0) {
-
                     h += 12;
-
                     format = "AM";
                 }
                 else if (h == 12) {
-
                     format = "PM";
-
                 }
                 else if (h > 12) {
-
                     h -= 12;
-
                     format = "PM";
-
                 }
                 else {
-
                     format = "AM";
                 }
 
@@ -353,7 +374,6 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
      void genereate_id()
     {/**generate again if id already exists*/
 
-
         String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random RANDOM = new Random();
         StringBuilder sb = new StringBuilder(4);
@@ -363,11 +383,10 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             sb.append(DATA.charAt(RANDOM.nextInt(DATA.length())));
 
             if(i==3)
-            {    Log.d("random", "generated_id=: "+sb.toString());
+            {
+//                Log.d("random", "generated_id=: "+sb.toString());
                 String g_id=sb.toString();
                 check_id_availiblty(g_id);
-
-
             }
         }
     }
@@ -376,13 +395,13 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     {
             if(id_list.contains(id))
             {
-                Log.d("random", "generating new id> ");
+//                Log.d("random", "generating new id> ");
                 genereate_id();
             }
             else
             {
                 /**,....set id**/
-                Log.d("random", "not generatinf , but id_seted: "+id);
+//                Log.d("random", "not generatinf , but id_seted: "+id);
                // id_ET.setText(id);
                 opp_id_S=id;
             }
@@ -395,6 +414,5 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         startActivity(new Intent(getApplicationContext(), login_signup.class));
         overridePendingTransition(0,0);
     }
-
 
 }

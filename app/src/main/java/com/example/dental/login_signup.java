@@ -11,6 +11,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,8 +28,6 @@ import java.util.Map;
 
 public class login_signup extends AppCompatActivity {
 
-
-
     TextView sign_up;
     Button login;
     EditText phno,password;
@@ -36,6 +35,7 @@ public class login_signup extends AppCompatActivity {
     String name_s,phno_s,mail_s,password_s;
     ArrayList<String> phone_list=new ArrayList<>();
     Map<String, String> ph_pas_map = new HashMap<String, String>();
+    Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -63,11 +63,13 @@ public class login_signup extends AppCompatActivity {
                 password_s=password.getText().toString();
                 if(TextUtils.isEmpty(phno_s) || TextUtils.isEmpty(password_s))
                 {
-                    Toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT).show();
+                    toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else if(!phone_list.contains(phno_s))
                 {
-                    Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
+                    toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else
                 {
@@ -81,13 +83,13 @@ public class login_signup extends AppCompatActivity {
                             i.putExtra("number", phno_s);
                             i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
 
-
                             sharedPreferences.edit().putString("phno", phno_s).commit();
                             startActivity(i);
                         }
                         else
                         {
-                            Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
+                            toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
+                            toast.setGravity(Gravity.TOP, 0, 0);
                         }
                 }
             }
@@ -123,11 +125,13 @@ public class login_signup extends AppCompatActivity {
                 mail_s=mail.getText().toString();
                 if(TextUtils.isEmpty(name_s)||TextUtils.isEmpty(password_s)||TextUtils.isEmpty(phno_s)||TextUtils.isEmpty(mail_s))
                 {
-                    Toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else  if(phone_list.contains(phno_s))
                 {
-                    Toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT).show();
+                    toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else {
                     new bg("insert").execute();

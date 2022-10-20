@@ -15,6 +15,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,10 +35,10 @@ public class patient_history extends AppCompatActivity
   TextView name;
   String ip,number_s;
   String opp_id_s, feed_back_s;
-
   adapter Adapeter;
   ArrayList<model> modelArrayList;
   RecyclerView rv;
+  Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -52,7 +53,7 @@ public class patient_history extends AppCompatActivity
 
         Bundle extras = getIntent().getExtras();
         number_s= sharedPreferences.getString("phno", "");
-        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
         new bg("name").execute();
 
         rv=findViewById(R.id.rv);
@@ -63,7 +64,6 @@ public class patient_history extends AppCompatActivity
         //recyclerView.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(Adapeter);
     }
-
 
     class bg extends AsyncTask<Object,Void,Void>
     {
@@ -295,11 +295,13 @@ public class patient_history extends AppCompatActivity
             public void onClick(View view) {
                 feed_back_s = feed.getText().toString();
                 if (TextUtils.isEmpty(feed_back_s)) {
-                    Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT).show();
+                    toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                 } else {
                     opp_id_s = opp_id;
                     new bg("feedback").execute();
-                    Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT).show();
+                    toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT).show();
+                    toast.setGravity(Gravity.TOP, 0, 0);
                     d.dismiss();
                 }
             }
