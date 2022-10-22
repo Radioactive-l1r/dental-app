@@ -14,6 +14,9 @@
         android:theme="@style/Theme.Dental"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".doctor_main"
+            android:exported="false" />
+        <activity
             android:name=".DepartmentInfo"
             android:exported="false">
             <meta-data

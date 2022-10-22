@@ -18,11 +18,16 @@
         <entry key="..\:/pro/dental/app/src/main/res/drawable/edit_t_bg.xml" value="0.222" />
         <entry key="..\:/pro/dental/app/src/main/res/drawable/text_bg.xml" value="0.195" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/activity_book_dialog.xml" value="0.259375" />
+        <entry key="..\:/pro/dental/app/src/main/res/layout/activity_department_info.xml" value="0.11614583333333334" />
+        <entry key="..\:/pro/dental/app/src/main/res/layout/activity_doctor_main.xml" value="0.259375" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/activity_login_signup.xml" value="0.176" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/activity_main.xml" value="0.259375" />
+        <entry key="..\:/pro/dental/app/src/main/res/layout/activity_medical_history.xml" value="0.259375" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/activity_patient_history.xml" value="0.259375" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/activity_patient_main.xml" value="0.259375" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/book_dialog.xml" value="0.259375" />
+        <entry key="..\:/pro/dental/app/src/main/res/layout/doctor_main_item.xml" value="0.259375" />
+        <entry key="..\:/pro/dental/app/src/main/res/layout/feedback_dialog.xml" value="0.259375" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/patient_history_item.xml" value="0.264" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/sign_up_dialog.xml" value="0.176" />
         <entry key="..\:/pro/dental/app/src/main/res/layout/x.xml" value="0.259375" />

@@ -71,6 +71,16 @@ public class login_signup extends AppCompatActivity {
                     toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
                     toast.setGravity(Gravity.TOP, 0, 0);
                 }
+                /**doctor login*/
+                else if(phno_s.contains("0123456789") && password_s.contains("1234"))
+
+                {
+                    Intent i = new Intent(login_signup.this, doctor_main.class);
+//                            String strName = null;
+
+
+                    startActivity(i);
+                }
                 else
                 {
                         /* check if pasword matches*/
