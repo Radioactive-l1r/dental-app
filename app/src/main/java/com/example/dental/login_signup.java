@@ -66,21 +66,18 @@ public class login_signup extends AppCompatActivity {
                     toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT).show();
                     toast.setGravity(Gravity.TOP, 0, 0);
                 }
+                /**doctor login*/
+                else if(phno_s.contains("0123456789") && password_s.contains("1234"))
+
+                {     startActivity(new Intent(getApplicationContext(), doctor_main.class));
+                    overridePendingTransition(0,0);
+                }
                 else if(!phone_list.contains(phno_s))
                 {
                     toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
                     toast.setGravity(Gravity.TOP, 0, 0);
                 }
-                /**doctor login*/
-                else if(phno_s.contains("0123456789") && password_s.contains("1234"))
 
-                {
-                    Intent i = new Intent(login_signup.this, doctor_main.class);
-//                            String strName = null;
-
-
-                    startActivity(i);
-                }
                 else
                 {
                         /* check if pasword matches*/
@@ -96,6 +93,7 @@ public class login_signup extends AppCompatActivity {
                             sharedPreferences.edit().putString("phno", phno_s).commit();
                             startActivity(i);
                         }
+
                         else
                         {
                             toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
