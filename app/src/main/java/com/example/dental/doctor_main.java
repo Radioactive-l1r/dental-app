@@ -5,15 +5,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.content.ReceiverCallNotAllowedException;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -72,10 +78,14 @@ public class doctor_main extends AppCompatActivity
                     jsonObj = jsonArr.getJSONObject(i);
                     Log.d("appointments", "jarray: : "+jsonObj);
 
-                    //String name_=jsonObj.getString("traffic_controller_name");
-                    String id=jsonObj.getString("opp_id");
 
-                    modelArrayList.add(new model(id,"SA","sa","as","SA"));
+                    String id=jsonObj.getString("opp_id");
+                    name_s=jsonObj.getString("name");
+                    date_s=jsonObj.getString("date_");
+                    time=jsonObj.getString("time_");
+                    feedbacK_s=jsonObj.getString("feedback");
+
+                    modelArrayList.add(new model(id,date_s,time,name_s,feedbacK_s));
 
 
                 } catch (JSONException e) {
@@ -93,6 +103,16 @@ public class doctor_main extends AppCompatActivity
             common.dism();
             adaPTER.notifyDataSetChanged();
         }
+    }
+
+
+    void open_diagon_dialog()
+    {
+//        Dialog d=new Dialog(this);
+//        d.setContentView(R.layout.diagnois_dialog);
+//        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+//        d.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+//        d.show();
     }
 
     class model {
@@ -160,6 +180,22 @@ public class doctor_main extends AppCompatActivity
             String da=modelArrayList.get(position).getDate()+" - "+modelArrayList.get(position).getTime();
             holder.tim_date.setText(da);
             holder.proble.setText(modelArrayList.get(position).getName());
+
+            /**open diagnose page*/
+            holder.more.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Toast.makeText(doctor_main.this, "lo", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(doctor_main.this, doctor_diagnois.class);
+//                            String strName = null;
+
+                    i.putExtra("name", modelArrayList.get(position).getName().toString());
+                    i.putExtra("opp_id", modelArrayList.get(position).getId().toString());
+
+                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                    startActivity(i);
+                }
+            });
 
         }
 

@@ -39,6 +39,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
     String ip;
     String number_s;
+    String names_S;
     TextView name,book,history;
     String age_type_S,date_S,time_s,problem_S,opp_id_S;
     Calendar calendar;
@@ -307,7 +308,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         protected Void doInBackground(Object... objects) {
             if (action.contains("insert"))
             {   String id=number_s+date_S+time_s;
-                common.send_req(ip,"c_qry=insert into appointment(opp_id,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
+                common.send_req(ip,"c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
 
             }
             if(action.contains("fetch"))
@@ -350,6 +351,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                         //String name_=jsonObj.getString("traffic_controller_name");
                         String nameS=jsonObj.getString("name");
                         name.setText(nameS);
+                        names_S=nameS;
 
 
                     } catch (JSONException e) {
