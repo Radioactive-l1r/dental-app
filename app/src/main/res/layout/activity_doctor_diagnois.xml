@@ -44,7 +44,7 @@
             android:layout_width="match_parent"
 
             android:gravity="top|start"
-            android:minHeight="200dp"
+            android:minHeight="100dp"
             android:text="I suffering thoug intense paint in front teeth, and even some jaw bleedning dsf dsjfhj kjsafd "
             android:textColor="#000000"
             android:elevation="10dp"
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
 
             android:gravity="top|start"
-            android:minHeight="200dp"
+            android:minHeight="100dp"
             android:text="I suffering thoug intense paint in front teeth, and even some jaw bleedning dsf dsjfhj kjsafd "
             android:textColor="#000000"
             android:elevation="10dp"
