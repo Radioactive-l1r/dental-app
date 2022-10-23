@@ -89,6 +89,7 @@ public class doctor_diagnois extends AppCompatActivity {
         {
             advice.setClickable(false);
             diagonois_tx.setVisibility(View.INVISIBLE);
+            cam.setVisibility(View.INVISIBLE);
             new bg("fetch").execute();
         }
 
