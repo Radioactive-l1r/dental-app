@@ -105,7 +105,7 @@
             android:layout_width="match_parent"
             android:autoSizeTextType="uniform"
             android:gravity="center"
-            android:text="DIAGNOIS"
+            android:text="SUBMIT"
             android:textColor="#FFFFFF"
 
             app:layout_heightPercent="4%"/>

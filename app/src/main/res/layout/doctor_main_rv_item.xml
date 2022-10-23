@@ -59,7 +59,7 @@
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="5dp"
             android:layout_marginBottom="5dp"
-            android:text="more"
+            android:text="diagnose"
             android:textColor="@color/high"></TextView>
     </androidx.percentlayout.widget.PercentRelativeLayout>
 
