@@ -308,6 +308,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         protected Void doInBackground(Object... objects) {
             if (action.contains("insert"))
             {   String id=number_s+date_S+time_s;
+                problem_S = problem_S.replace("'", "''");
                 common.send_req(ip,"c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
 
             }
