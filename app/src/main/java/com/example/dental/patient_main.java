@@ -209,8 +209,9 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 problem_S=problem.getText().toString();
                 if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
                 {
-                    toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
                 else
                 {

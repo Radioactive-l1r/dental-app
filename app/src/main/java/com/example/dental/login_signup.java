@@ -63,8 +63,9 @@ public class login_signup extends AppCompatActivity {
                 password_s=password.getText().toString();
                 if(TextUtils.isEmpty(phno_s) || TextUtils.isEmpty(password_s))
                 {
-                    toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
                 /**doctor login*/
                 else if(phno_s.contains("0123456789") && password_s.contains("1234"))
@@ -74,8 +75,9 @@ public class login_signup extends AppCompatActivity {
                 }
                 else if(!phone_list.contains(phno_s))
                 {
-                    toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
 
                 else
@@ -96,8 +98,9 @@ public class login_signup extends AppCompatActivity {
 
                         else
                         {
-                            toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT).show();
+                            toast = Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT);
                             toast.setGravity(Gravity.TOP, 0, 0);
+                            toast.show();
                         }
                 }
             }
@@ -133,12 +136,13 @@ public class login_signup extends AppCompatActivity {
                 mail_s=mail.getText().toString();
                 if(TextUtils.isEmpty(name_s)||TextUtils.isEmpty(password_s)||TextUtils.isEmpty(phno_s)||TextUtils.isEmpty(mail_s))
                 {
-                    toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 }
                 else  if(phone_list.contains(phno_s))
                 {
-                    toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
                 }
                 else {

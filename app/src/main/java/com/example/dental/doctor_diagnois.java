@@ -111,7 +111,7 @@ public class doctor_diagnois extends AppCompatActivity {
         {
             advice.setClickable(false);
             diagonois_tx.setVisibility(View.INVISIBLE);
-            cam.setVisibility(View.INVISIBLE);
+            upload.setVisibility(View.INVISIBLE);
             new bg("fetch").execute();
         }
 
