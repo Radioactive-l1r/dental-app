@@ -5,19 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.ReceiverCallNotAllowedException;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +24,7 @@ import java.util.ArrayList;
 
 public class doctor_main extends AppCompatActivity
 {
-    String name_s,date_s,time,_S,id_s,feedbacK_s;
+    String name_s,date_s,time,_S,id_s,feedbacK_s ,Status_s;
     String ip;
 
     ArrayList<model> modelArrayList;
@@ -52,7 +47,7 @@ public class doctor_main extends AppCompatActivity
         rv.setAdapter(adaPTER);
 
 
-        modelArrayList.add(new model("ds","S","","","AS"));
+        modelArrayList.add(new model("ds","S","","","AS", ""));
         new bg().execute();
     }
 
@@ -84,8 +79,9 @@ public class doctor_main extends AppCompatActivity
                     date_s=jsonObj.getString("date_");
                     time=jsonObj.getString("time_");
                     feedbacK_s=jsonObj.getString("feedback");
+                    Status_s=jsonObj.getString("status");
 
-                    modelArrayList.add(new model(id,date_s,time,name_s,feedbacK_s));
+                    modelArrayList.add(new model(id,date_s,time,name_s,feedbacK_s, Status_s));
 
 
                 } catch (JSONException e) {
@@ -116,14 +112,15 @@ public class doctor_main extends AppCompatActivity
     }
 
     class model {
-        private String id,date,time,name,feedback;
+        private String id,date,time,name,feedback ,status;
 
-        model(String id, String date, String time, String name, String feedback) {
+        model(String id, String date, String time, String name, String feedback, String status) {
             this.id = id;
             this.date = date;
             this.time = time;
             this.name = name;
             this.feedback = feedback;
+            this.status = status;
         }
 
         public String getId() {
@@ -144,6 +141,10 @@ public class doctor_main extends AppCompatActivity
 
         public String getFeedback() {
             return feedback;
+        }
+
+        public String getStatus() {
+            return status;
         }
     }
 
@@ -191,7 +192,7 @@ public class doctor_main extends AppCompatActivity
 
                     i.putExtra("name", modelArrayList.get(position).getName().toString());
                     i.putExtra("opp_id", modelArrayList.get(position).getId().toString());
-
+                    i.putExtra("status",modelArrayList.get(position).getStatus().toString());
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(i);
                 }

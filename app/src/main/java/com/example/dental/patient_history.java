@@ -122,8 +122,9 @@ public class patient_history extends AppCompatActivity
                         String time_=jsonObj.getString("time_");
                         String problem_=jsonObj.getString("problem");
                         String d_advice_= jsonObj.getString("d_advice");
+                        String status=jsonObj.getString("status");
                         String feed_back=jsonObj.getString("feedback");
-                        modelArrayList.add(new model(id,date_,time_,problem_,d_advice_,feed_back));
+                        modelArrayList.add(new model(id,date_,time_,problem_,d_advice_,feed_back ,status));
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -155,9 +156,9 @@ public class patient_history extends AppCompatActivity
 
     class model
     {
-        private  String id,date,time,problem,d_advice,feedback_value;
+        private  String id,date,time,problem,d_advice,feedback_value ,status;
 
-        model(String id, String date, String time, String problem, String d_advice, String feedback_value) {
+        model(String id, String date, String time, String problem, String d_advice, String feedback_value, String status) {
             this.id = id;
             this.date = date;
             this.time = time;
@@ -165,6 +166,7 @@ public class patient_history extends AppCompatActivity
             this.d_advice = d_advice;
             this.feedback_value = feedback_value;
 
+            this.status = status;
         }
 
         public String getId() {
@@ -191,6 +193,9 @@ public class patient_history extends AppCompatActivity
             return feedback_value;
         }
 
+        public String getStatus() {
+            return status;
+        }
     }
 
     class adapter extends RecyclerView.Adapter<adapter.MyViewHolder>
@@ -253,12 +258,26 @@ public class patient_history extends AppCompatActivity
                  }
             });
 
+           ;
             holder.moreInfo.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    String status=modelArrayList.get(position).getStatus().toString();
+                            if(status.contains("done"))
+                            {
+                                Intent i = new Intent(patient_history.this, doctor_diagnois.class);
+//                            String strName = null;
 
-                    Intent intent = new Intent(getApplicationContext(), medical_history.class);
-                    startActivity(intent);
+                                i.putExtra("name",name.getText());
+                                i.putExtra("opp_id", modelArrayList.get(position).getId().toString());
+                                i.putExtra("status",modelArrayList.get(position).getStatus().toString());
+                                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                                startActivity(i);
+                            }else {
+                                Intent intent = new Intent(getApplicationContext(), medical_history.class);
+                                startActivity(intent);
+                            }
+
                 }
             });
 

@@ -9,25 +9,28 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 public class doctor_diagnois extends AppCompatActivity {
 
     String ip;
     String opp_id;
-    String name;
+    String name ,status;
     TextView name_tv;
     ImageView cam,pic;
     EditText advice;
     TextView diagonois_tx;
-    String d_advice;
+    TextView problem_tv;
+    String d_advice , p_problem;
 
     private static final int pic_id = 123;
     @Override
@@ -43,6 +46,7 @@ public class doctor_diagnois extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         opp_id=extras.getString("opp_id");
         name=extras.getString("name");
+        status=extras.getString("status");
         Toast.makeText(this, ""+opp_id, Toast.LENGTH_SHORT).show();
 
         name_tv=findViewById(R.id.name);
@@ -66,10 +70,27 @@ public class doctor_diagnois extends AppCompatActivity {
             public void onClick(View view) {
                 /**send to db*/
                 d_advice=advice.getText().toString();
-                new bg().execute();
+//                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
+////            Bitmap bitmap = bitmapDrawable.getBitmap();
+////            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+////            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+////            byte[] bytes = byteArrayOutputStream.toByteArray();
+////            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
+////           // Log.d("image byte", "doInBackground: "+image);
+
+                new bg("insert").execute();
 
             }
         });
+
+        problem_tv=findViewById(R.id.problem);
+        new bg("fetch").execute();
+        if(status.contains("done"))
+        {
+            advice.setClickable(false);
+            diagonois_tx.setVisibility(View.INVISIBLE);
+            new bg("fetch").execute();
+        }
 
 
     }
@@ -86,6 +107,13 @@ public class doctor_diagnois extends AppCompatActivity {
 
     class bg extends AsyncTask<Object,Void,Void>
     {
+
+        private String action;
+
+        bg(String action) {
+            this.action = action;
+        }
+
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -94,18 +122,35 @@ public class doctor_diagnois extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Object... objects) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
-            byte[] bytes = byteArrayOutputStream.toByteArray();
-            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
+//            BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
+//            Bitmap bitmap = bitmapDrawable.getBitmap();
+//            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+//            byte[] bytes = byteArrayOutputStream.toByteArray();
+//            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
+//           // Log.d("image byte", "doInBackground: "+image);
+                    if(action.contains("insert")) {
+                        common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
+                    }
+                    else  if(action.contains("fetch"))
+                    {
+                        JSONArray jsonArr;
+                        jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM appointment where opp_id='"+opp_id+"'");
 
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 70, stream);
-            stream.toByteArray();
-            common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='"+d_advice+"',img='"+stream+"'where opp_id='"+opp_id+"'");
+                        for (int i = 0; i < jsonArr.length(); i++)
+                        {
+                            JSONObject jsonObj = null;
+                            try {
+                                jsonObj = jsonArr.getJSONObject(i);
+                                Log.d("appointments", "jarray: : "+jsonObj);
+                                p_problem=jsonObj.getString("problem");
+                                d_advice=jsonObj.getString("d_advice");
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
 
+                        }
+                    }
             return null;
         }
 
@@ -113,6 +158,9 @@ public class doctor_diagnois extends AppCompatActivity {
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             common.dism();
+            advice.setText(d_advice);
+            problem_tv.setText(p_problem);
+
         }
     }
 
