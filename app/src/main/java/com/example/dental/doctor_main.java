@@ -5,10 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -47,7 +51,7 @@ public class doctor_main extends AppCompatActivity
         rv.setAdapter(adaPTER);
 
 
-        modelArrayList.add(new model("ds","S","","","AS", ""));
+        //modelArrayList.add(new model("ds","S","","","AS", ""));
         new bg().execute();
     }
 
@@ -101,14 +105,19 @@ public class doctor_main extends AppCompatActivity
         }
     }
 
-
-    void open_diagon_dialog()
+    void open_feedbac(String feedbaa)
     {
-//        Dialog d=new Dialog(this);
-//        d.setContentView(R.layout.diagnois_dialog);
-//        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-//        d.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
-//        d.show();
+        Dialog d=new Dialog(this);
+        d.setContentView(R.layout.doc_feed_back_dilaog);
+        d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        TextView feed;
+        feed=d.findViewById(R.id.feedback);
+
+        if(!TextUtils.isEmpty(feedbaa))
+        {
+            feed.setText(feedbaa);
+        }
+        d.show();
     }
 
     class model {
@@ -157,13 +166,13 @@ public class doctor_main extends AppCompatActivity
         }
 
         public class MyViewHoder extends RecyclerView.ViewHolder {
-            TextView tim_date,proble,review,more,index;
+            TextView tim_date,proble,feedback,more,index;
             public MyViewHoder(@NonNull View itemView) {
 
                 super(itemView);
                 tim_date=itemView.findViewById(R.id.time_date);
                 proble=itemView.findViewById(R.id.problem);
-                review=itemView.findViewById(R.id.review);
+                feedback=itemView.findViewById(R.id.review);
                 more=itemView.findViewById(R.id.moreInfo);
 
             }
@@ -195,6 +204,16 @@ public class doctor_main extends AppCompatActivity
                     i.putExtra("status",modelArrayList.get(position).getStatus().toString());
                     i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
                     startActivity(i);
+                }
+            });
+            holder.feedback.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //open feedback dialog
+                    String fb=modelArrayList.get(position).getFeedback().toString();
+                    Toast.makeText(doctor_main.this, ""+fb, Toast.LENGTH_SHORT).show();
+                  open_feedbac(fb);
+
                 }
             });
 
