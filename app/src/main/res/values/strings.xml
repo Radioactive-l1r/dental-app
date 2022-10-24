@@ -49,4 +49,5 @@
     <string name="no_information_added">No Information Added</string>
     <string name="more">More</string>
     <string name="create_an_account">Create an account</string>
+    <string name="upload_image"><u>Upload Image</u></string>
 </resources>
