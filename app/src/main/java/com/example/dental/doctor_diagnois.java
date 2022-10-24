@@ -178,11 +178,9 @@ public class doctor_diagnois extends AppCompatActivity {
                     if(action.contains("insert")) {
                         common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
                       /**bada bsdkaaaaaaaaaaaa*/
-                        //common.insert_diagnois(image_data,opp_id);
+                       common.insert_diagnois(sImage,opp_id);
 
-                        toast = Toast.makeText(doctor_diagnois.this, "Advice sent", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.CENTER, 0, 0);
-                        toast.show();
+
                     }
                     else  if(action.contains("fetch"))
                     {
@@ -197,6 +195,7 @@ public class doctor_diagnois extends AppCompatActivity {
                                 Log.d("appointments", "jarray: : "+jsonObj);
                                 p_problem=jsonObj.getString("problem");
                                 d_advice=jsonObj.getString("d_advice");
+                                sImage=jsonObj.getString("img");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -212,7 +211,12 @@ public class doctor_diagnois extends AppCompatActivity {
             common.dism();
             advice.setText(d_advice);
             problem_tv.setText(p_problem);
-
+            // retrieve
+            if(action.contains("fetch")) {
+                byte[] bytes2 = Base64.decode(sImage, Base64.DEFAULT);
+                Bitmap bitmap2 = BitmapFactory.decodeByteArray(bytes2, 0, bytes2.length);
+                pic.setImageBitmap(bitmap2);
+            }
         }
     }
 
