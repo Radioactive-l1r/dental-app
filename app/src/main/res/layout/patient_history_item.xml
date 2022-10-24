@@ -27,9 +27,8 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="10dp"
             android:layout_marginVertical="5dp"
-            android:text="12/22/12 - 12:21 pm"
-            android:textColor="@color/black"
             android:fontFamily="@font/urbanist_bold"
+            android:textColor="@color/black"
             android:textStyle="bold" />
 
         <TextView
@@ -39,9 +38,8 @@
             android:layout_below="@+id/time_date"
             android:layout_marginHorizontal="10dp"
             android:layout_marginTop="5dp"
-            android:text="dasd dasd  fasd asdda dsa  adasd dsada da das das das das da sdsadasda"
-            android:textColor="@color/black"
-            android:fontFamily="@font/urbanist_semibold"/>
+            android:fontFamily="@font/urbanist_semibold"
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/review"

@@ -11,13 +11,12 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:background="@color/primary"
+        android:elevation="6dp"
         android:fontFamily="@font/urbanist_bold"
         android:gravity="center"
-        android:elevation="6dp"
-        android:text="Rocky bhai (Adult)."
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,23 +33,23 @@
             android:fontFamily="@font/urbanist_bold"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/name" />
-        <TextView
 
-            android:layout_below="@+id/t"
-            android:background="@drawable/edit_t_bg"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/problem"
-            android:layout_width="match_parent"
-            android:gravity="top|start"
-            android:minHeight="100dp"
-            android:text="I suffering thoug intense paint in front teeth, and even some jaw bleedning dsf dsjfhj kjsafd "
-            android:textColor="@color/black"
-            android:fontFamily="@font/urbanist_medium"
-            android:textSize="16sp"
-            android:elevation="4dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/t"  />
+    <TextView
+
+        android:id="@+id/problem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/t"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_t_bg"
+        android:elevation="4dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:gravity="top|start"
+        android:minHeight="100dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/t" />
         <TextView
             android:id="@+id/d"
             android:layout_marginTop="20dp"
@@ -64,22 +63,23 @@
             android:fontFamily="@font/urbanist_bold"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toBottomOf="@id/problem" />
-        <EditText
-            android:layout_below="@+id/d"
-            android:background="@drawable/edit_t_bg"
-            android:layout_marginHorizontal="20dp"
-            android:layout_marginTop="10dp"
-            android:id="@+id/advice"
-            android:layout_width="match_parent"
-            android:gravity="top|start"
-            android:minHeight="100dp"
-            android:text="I suffering thoug intense paint in front teeth, and even some jaw bleedning dsf dsjfhj kjsafd "
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:fontFamily="@font/urbanist_medium"
-            android:elevation="4dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/d"  />
+
+    <EditText
+        android:id="@+id/advice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/d"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edit_t_bg"
+        android:elevation="4dp"
+        android:fontFamily="@font/urbanist_medium"
+        android:gravity="top|start"
+        android:minHeight="100dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/d"
+        tools:layout_editor_absoluteX="20dp" />
 
     <ImageView
         android:id="@+id/cam"

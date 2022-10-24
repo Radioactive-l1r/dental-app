@@ -13,13 +13,12 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="45dp"
+        android:background="@color/primary"
+        android:elevation="6dp"
         android:fontFamily="@font/urbanist_bold"
         android:gravity="center"
-        android:elevation="6dp"
-        android:text="Rocky bhai"
         android:textColor="@color/white"
         android:textSize="24sp"
-        android:background="@color/primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
