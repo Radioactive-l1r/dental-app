@@ -39,4 +39,14 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="leave_a_review">Leave a review</string>
+    <string name="orthoclue">Orthoclue</string>
+    <string name="problem">Problem:</string>
+    <string name="advice">Advice:</string>
+    <string name="submit">SUBMIT</string>
+    <string name="diagnose">Diagnose</string>
+    <string name="feedback">Feedback</string>
+    <string name="no_information_added">No Information Added</string>
+    <string name="more">More</string>
+    <string name="create_an_account">Create an account</string>
 </resources>

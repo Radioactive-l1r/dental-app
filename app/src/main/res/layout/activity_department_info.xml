@@ -6,18 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".DepartmentInfo">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="10dp"
-        app:contentPadding="6dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+
 
         <ScrollView
             android:layout_width="match_parent"
@@ -31,7 +20,10 @@
                 <TextView
                     android:id="@+id/headerInfo"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:background="@color/primary"
+                    android:fontFamily="@font/urbanist_bold"
+                    android:textColor="@color/white"
                     android:gravity="center"
                     android:textSize="24sp"
                     android:textStyle="bold" />
@@ -39,15 +31,21 @@
                 <AdapterViewFlipper
                     android:id="@+id/AdapterViewFlipper"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp" />
+                    android:layout_height="200dp"
+                    android:layout_marginTop="25dp"/>
 
                 <TextView
                     android:id="@+id/dept_info"
                     android:layout_width="match_parent"
-                    android:layout_height="500dp"
-                    android:gravity="center" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:paddingHorizontal="25dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/urbanist_medium"
+                    android:layout_gravity="center_vertical|end"/>
             </LinearLayout>
         </ScrollView>
-    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

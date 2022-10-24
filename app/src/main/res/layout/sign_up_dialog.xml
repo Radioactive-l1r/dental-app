@@ -12,10 +12,21 @@
         android:layout_height="match_parent"
         android:paddingTop="20dp"
         android:paddingBottom="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/create_an_account"
+            app:layout_widthPercent="100%"
+            android:textAlignment="center"
+            android:fontFamily="@font/urbanist_semibold"
+            android:textSize="20sp"
+            android:textColor="@color/black"/>
+
         <EditText
             android:id="@+id/name"
             android:layout_marginHorizontal="30dp"
-            android:layout_marginVertical="10dp"
+            android:layout_marginTop="50dp"
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:background="@drawable/input_field"
@@ -24,6 +35,7 @@
             android:hint="@string/full_name"
             android:textColor="@color/black"
             android:textStyle="bold"
+            android:fontFamily="@font/urbanist_bold"
             android:inputType="text"
             app:layout_heightPercent="7%"
             app:layout_widthPercent="100%"/>
@@ -38,6 +50,7 @@
             android:elevation="2dp"
             android:paddingStart="10dp"
             android:hint="@string/phone_number"
+            android:fontFamily="@font/urbanist_bold"
             android:textColor="@color/black"
             android:textStyle="bold"
             android:inputType="number"
@@ -53,6 +66,7 @@
             android:background="@drawable/input_field"
             android:elevation="2dp"
             android:paddingStart="10dp"
+            android:fontFamily="@font/urbanist_bold"
             android:hint="@string/email"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -69,6 +83,7 @@
             android:background="@drawable/input_field"
             android:elevation="2dp"
             android:paddingStart="10dp"
+            android:fontFamily="@font/urbanist_bold"
             android:hint="@string/password"
             android:textColor="@color/black"
             android:textStyle="bold"
@@ -83,11 +98,12 @@
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:background="@drawable/textview_button"
+            android:fontFamily="@font/urbanist_bold"
             android:textSize="20sp"
             android:elevation="2dp"
             android:gravity="center"
             android:text="@string/sign_up"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textStyle="bold"
             app:layout_heightPercent="7%"
             app:layout_widthPercent="100%"/>

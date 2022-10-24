@@ -12,16 +12,22 @@
     <TextView
         android:id="@+id/name"
         android:layout_width="match_parent"
-        android:autoSizeTextType="uniform"
+        android:layout_height="45dp"
+        android:fontFamily="@font/urbanist_bold"
         android:gravity="center"
+        android:elevation="6dp"
         android:text="Rocky bhai"
-        android:textColor="#00BFA5"
-        android:textStyle="bold"
-        app:layout_heightPercent="4%"></TextView>
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:background="@color/primary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
   <androidx.recyclerview.widget.RecyclerView
       android:layout_below="@+id/name"
+      android:layout_marginTop="10dp"
       android:id="@+id/rv"
       android:layout_width="match_parent"
-      android:layout_height="match_parent"></androidx.recyclerview.widget.RecyclerView>
+      android:layout_height="match_parent"/>
   </androidx.percentlayout.widget.PercentRelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -40,7 +40,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     String ip;
     String number_s;
     String names_S;
-    TextView name,book,history;
+    TextView book,history;
     String age_type_S,date_S,time_s,problem_S,opp_id_S;
     Calendar calendar;
     int year,month,day;
@@ -67,7 +67,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 //        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
 
         calendar= Calendar.getInstance();
-        name=findViewById(R.id.name);
+        //name=findViewById(R.id.name);
         book=findViewById(R.id.book);
         book.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,7 +115,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         peridontics.setOnClickListener(view -> sendInfo(view));
         cons_endo.setOnClickListener(view -> sendInfo(view));
 
-        new bg("name").execute();
+        //new bg("name").execute();
     }
 
     void sendInfo(View view){
@@ -209,9 +209,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                 problem_S=problem.getText().toString();
                 if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
                 {
-                    toast = Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT);
+                    toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
                     toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
                 }
                 else
                 {
@@ -309,7 +308,6 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         protected Void doInBackground(Object... objects) {
             if (action.contains("insert"))
             {   String id=number_s+date_S+time_s;
-                problem_S = problem_S.replace("'", "''");
                 common.send_req(ip,"c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
 
             }
@@ -352,7 +350,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
                         //String name_=jsonObj.getString("traffic_controller_name");
                         String nameS=jsonObj.getString("name");
-                        name.setText(nameS);
+                        //name.setText(nameS);
                         names_S=nameS;
 
 
