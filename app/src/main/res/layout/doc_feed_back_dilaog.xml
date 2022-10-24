@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="10dp"
+    app:cardCornerRadius="10dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <androidx.percentlayout.widget.PercentRelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+
+            android:id="@+id/feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:lines="8"
+            android:fontFamily="@font/urbanist_semibold"
+            android:gravity="center"
+            android:inputType="textMultiLine"
+            android:layout_below="@+id/stat"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="10dp"
+            android:background="@drawable/input_field"
+            android:hint="No feedback available"
+            android:textColor="@color/black" />
+    </androidx.percentlayout.widget.PercentRelativeLayout>
+
+</androidx.cardview.widget.CardView>

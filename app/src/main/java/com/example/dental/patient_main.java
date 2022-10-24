@@ -115,7 +115,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         peridontics.setOnClickListener(view -> sendInfo(view));
         cons_endo.setOnClickListener(view -> sendInfo(view));
 
-        //new bg("name").execute();
+        new bg("name").execute();
     }
 
     void sendInfo(View view){
