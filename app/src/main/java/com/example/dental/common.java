@@ -56,7 +56,8 @@ public class common {
         handler.postDelayed(new Runnable() {
             public void run() {
                 dialog.dismiss();
-            }}, 1000);
+            }
+        }, 1000);
 
 
     }
@@ -83,21 +84,26 @@ public class common {
         return jsonArr ;
     }
 
-    public  static void insert_diagnois(String img_data,String img_id)
+    public static String insert_diagnois(String img_data,String img_id)
     {
         HttpClient httpClient=new DefaultHttpClient();
-        HttpPost httpPost=new HttpPost("http://dentaldb.42web.io/img_sql.php");
+        HttpPost httpPost=new HttpPost("http://dentaldb.42web.io/sql_Img.php");
+        String result = "";
         try {
-        List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>();
-            nameValuePairs.add(new BasicNameValuePair("imgData",img_data));
+            List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);
             nameValuePairs.add(new BasicNameValuePair("ImgId",img_id));
+            nameValuePairs.add(new BasicNameValuePair("imgData",img_data));
 
             httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
             HttpResponse response=httpClient.execute(httpPost);
-        } catch (IOException e)
-        {
+            HttpEntity entity = response.getEntity();
+            result = EntityUtils.toString(entity);
 
+        } catch (IOException e){
+            e.printStackTrace();
+            Log.d("er", "onCreate: "+e);
         }
+        return result;
     }
 
 

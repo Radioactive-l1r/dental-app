@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,6 +25,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class doctor_diagnois extends AppCompatActivity {
 
@@ -30,12 +33,15 @@ public class doctor_diagnois extends AppCompatActivity {
     String opp_id;
     String name ,status;
     TextView name_tv;
-    ImageView cam,pic;
     EditText advice;
     TextView diagonois_tx;
     TextView problem_tv;
     String d_advice , p_problem;
+    TextView upload;
+    String sImage;
+    ImageView pic;
     Toast toast;
+    //    ImageView cam;
 
     String image_data;
 
@@ -59,17 +65,30 @@ public class doctor_diagnois extends AppCompatActivity {
         name_tv=findViewById(R.id.name);
         name_tv.setText(name);
 
-        cam=findViewById(R.id.cam);
         pic=findViewById(R.id.pic);
+//        cam=findViewById(R.id.cam);
+//
+//        cam.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+//                // Start the activity with camera_intent, and request pic id
+//                startActivityForResult(camera_intent, pic_id);
+//            }
+//        });
 
-        cam.setOnClickListener(new View.OnClickListener() {
+        upload = findViewById(R.id.upload);
+        upload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent camera_intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                // Start the activity with camera_intent, and request pic id
-                startActivityForResult(camera_intent, pic_id);
+
+                pic.setImageBitmap(null);
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(Intent.createChooser(intent,"Select Image"),100);
             }
         });
+
         advice=findViewById(R.id.advice);
         diagonois_tx=findViewById(R.id.diagnois);
         diagonois_tx.setOnClickListener(new View.OnClickListener() {
@@ -77,15 +96,14 @@ public class doctor_diagnois extends AppCompatActivity {
             public void onClick(View view) {
                 /**send to db*/
                 d_advice=advice.getText().toString();
-                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
-            Bitmap bitmap = bitmapDrawable.getBitmap();
-            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
-            byte[] bytes = byteArrayOutputStream.toByteArray();
-            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
-            image_data=image;
-//           // Log.d("image byte", "doInBackground: "+image);
-
+//                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
+//                Bitmap bitmap = bitmapDrawable.getBitmap();
+//                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+//                bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+//                byte[] bytes = byteArrayOutputStream.toByteArray();
+//                String image = Base64.encodeToString(bytes , Base64.DEFAULT);
+//                image_data=image;
+    //           // Log.d("image byte", "doInBackground: "+image);
                 new bg("insert").execute();
 
             }
@@ -97,7 +115,7 @@ public class doctor_diagnois extends AppCompatActivity {
         {
             advice.setClickable(false);
             diagonois_tx.setVisibility(View.INVISIBLE);
-            cam.setVisibility(View.INVISIBLE);
+            upload.setVisibility(View.INVISIBLE);
             new bg("fetch").execute();
         }
 
@@ -106,11 +124,30 @@ public class doctor_diagnois extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // Match the request 'pic id with requestCode
-        if (requestCode == pic_id) {
-            // BitMap is data structure of image file which store the image in memory
-            Bitmap photo = (Bitmap) data.getExtras().get("data");
-            // Set the image in imageview for display
-            pic.setImageBitmap(photo);
+//        if (requestCode == pic_id) {
+//            // BitMap is data structure of image file which store the image in memory
+//            Bitmap photo = (Bitmap) data.getExtras().get("data");
+//            // Set the image in imageview for display
+//            pic.setImageBitmap(photo);
+//        }
+        if (requestCode==100 && resultCode==RESULT_OK && data!=null)
+        {
+            Uri uri=data.getData();
+            try {
+                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
+                ByteArrayOutputStream stream=new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                byte[] bytes=stream.toByteArray();
+                sImage= Base64.encodeToString(bytes,Base64.DEFAULT);
+
+                // retrieve
+                byte[] bytes2= Base64.decode(sImage,Base64.DEFAULT);
+                Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes2,0,bytes2.length);
+                pic.setImageBitmap(bitmap2);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
     }
 
