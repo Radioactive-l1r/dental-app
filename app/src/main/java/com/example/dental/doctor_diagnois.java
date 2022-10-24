@@ -9,6 +9,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -20,6 +21,8 @@ import android.widget.Toast;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 
 public class doctor_diagnois extends AppCompatActivity {
 
@@ -33,6 +36,8 @@ public class doctor_diagnois extends AppCompatActivity {
     TextView problem_tv;
     String d_advice , p_problem;
     Toast toast;
+
+    String image_data;
 
     private static final int pic_id = 123;
     @Override
@@ -72,13 +77,14 @@ public class doctor_diagnois extends AppCompatActivity {
             public void onClick(View view) {
                 /**send to db*/
                 d_advice=advice.getText().toString();
-//                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
-////            Bitmap bitmap = bitmapDrawable.getBitmap();
-////            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-////            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
-////            byte[] bytes = byteArrayOutputStream.toByteArray();
-////            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
-////           // Log.d("image byte", "doInBackground: "+image);
+                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
+            Bitmap bitmap = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG,100,byteArrayOutputStream);
+            byte[] bytes = byteArrayOutputStream.toByteArray();
+            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
+            image_data=image;
+//           // Log.d("image byte", "doInBackground: "+image);
 
                 new bg("insert").execute();
 
@@ -134,6 +140,9 @@ public class doctor_diagnois extends AppCompatActivity {
 //           // Log.d("image byte", "doInBackground: "+image);
                     if(action.contains("insert")) {
                         common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
+                      /**bada bsdkaaaaaaaaaaaa*/
+                        //common.insert_diagnois(image_data,opp_id);
+
                         toast = Toast.makeText(doctor_diagnois.this, "Advice sent", Toast.LENGTH_SHORT);
                         toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
@@ -169,5 +178,7 @@ public class doctor_diagnois extends AppCompatActivity {
 
         }
     }
+
+
 
 }

@@ -1,6 +1,5 @@
 package com.example.dental;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -12,14 +11,21 @@ import android.view.ViewGroup;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class common {
 
@@ -76,5 +82,26 @@ public class common {
         }
         return jsonArr ;
     }
+
+    public  static void insert_diagnois(String img_data,String img_id)
+    {
+        HttpClient httpClient=new DefaultHttpClient();
+        HttpPost httpPost=new HttpPost("http://dentaldb.42web.io/img_sql.php");
+        try {
+        List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("imgData",img_data));
+            nameValuePairs.add(new BasicNameValuePair("ImgId",img_id));
+
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+            HttpResponse response=httpClient.execute(httpPost);
+        } catch (IOException e)
+        {
+
+        }
+    }
+
+
+
+
 
 }
