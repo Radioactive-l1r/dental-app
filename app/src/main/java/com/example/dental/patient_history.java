@@ -314,13 +314,15 @@ public class patient_history extends AppCompatActivity
             public void onClick(View view) {
                 feed_back_s = feed.getText().toString();
                 if (TextUtils.isEmpty(feed_back_s)) {
-                    toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                 } else {
                     opp_id_s = opp_id;
                     new bg("feedback").execute();
-                    toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT).show();
+                    toast = Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);
+                    toast.show();
                     d.dismiss();
                 }
             }

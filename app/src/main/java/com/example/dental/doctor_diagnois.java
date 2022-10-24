@@ -10,6 +10,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -31,6 +32,7 @@ public class doctor_diagnois extends AppCompatActivity {
     TextView diagonois_tx;
     TextView problem_tv;
     String d_advice , p_problem;
+    Toast toast;
 
     private static final int pic_id = 123;
     @Override
@@ -132,6 +134,9 @@ public class doctor_diagnois extends AppCompatActivity {
 //           // Log.d("image byte", "doInBackground: "+image);
                     if(action.contains("insert")) {
                         common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
+                        toast = Toast.makeText(doctor_diagnois.this, "Advice sent", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
+                        toast.show();
                     }
                     else  if(action.contains("fetch"))
                     {
