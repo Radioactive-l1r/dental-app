@@ -187,7 +187,7 @@ public class doctor_main extends AppCompatActivity
             holder.more.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(doctor_main.this, "lo", Toast.LENGTH_SHORT).show();
+
                     Intent i = new Intent(doctor_main.this, doctor_diagnois.class);
 //                            String strName = null;
 
@@ -203,7 +203,7 @@ public class doctor_main extends AppCompatActivity
                 public void onClick(View view) {
                     //open feedback dialog
                     String fb=modelArrayList.get(position).getFeedback().toString();
-                    Toast.makeText(doctor_main.this, ""+fb, Toast.LENGTH_SHORT).show();
+
                   open_feedbac(fb);
 
                 }

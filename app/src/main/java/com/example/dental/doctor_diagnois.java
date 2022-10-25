@@ -58,7 +58,7 @@ public class doctor_diagnois extends AppCompatActivity {
         opp_id=extras.getString("opp_id");
         name=extras.getString("name");
         status=extras.getString("status");
-        Toast.makeText(this, ""+opp_id, Toast.LENGTH_SHORT).show();
+
 
         name_tv=findViewById(R.id.name);
         name_tv.setText(name);
@@ -222,8 +222,8 @@ public class doctor_diagnois extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), doctor_main.class));
-        overridePendingTransition(0,0);
+//        startActivity(new Intent(getApplicationContext(), doctor_main.class));
+//        overridePendingTransition(0,0);
     }
 
 }
