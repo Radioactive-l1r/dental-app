@@ -68,7 +68,7 @@ public class doctor_main extends AppCompatActivity
         @Override
         protected Void doInBackground(Object... objects) {
             JSONArray jsonArr;
-            jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM appointment");
+            jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id,name,date_,time_,feedback,status FROM appointment");
             modelArrayList.clear();
             for (int i = 0; i < jsonArr.length(); i++)
             {

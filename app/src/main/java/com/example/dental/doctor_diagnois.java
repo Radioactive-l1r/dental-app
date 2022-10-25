@@ -185,7 +185,7 @@ public class doctor_diagnois extends AppCompatActivity {
                     else  if(action.contains("fetch"))
                     {
                         JSONArray jsonArr;
-                        jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM appointment where opp_id='"+opp_id+"'");
+                        jsonArr=  common.send_req(ip,"c_qry=SELECT problem,d_advice,img FROM appointment where opp_id='"+opp_id+"'");
 
                         for (int i = 0; i < jsonArr.length(); i++)
                         {

@@ -84,7 +84,7 @@ public class patient_history extends AppCompatActivity
             if(action.contains("name"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM patient where phno='"+number_s+"'");
+                jsonArr=  common.send_req(ip,"c_qry=SELECT name FROM patient where phno='"+number_s+"'");
 
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
@@ -107,7 +107,7 @@ public class patient_history extends AppCompatActivity
           else   if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM appointment where phno='"+number_s+"'");
+                jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id,date_,time_,problem,d_advice,status,feedback FROM appointment where phno='"+number_s+"'");
                 modelArrayList.clear();
                 for (int i = 0; i < jsonArr.length(); i++)
                 {

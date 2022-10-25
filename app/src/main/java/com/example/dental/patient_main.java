@@ -316,7 +316,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM appointment");
+                jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id FROM appointment");
                 id_list.clear();
 
                 for (int i = 0; i < jsonArr.length(); i++)
@@ -328,7 +328,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
                         //String name_=jsonObj.getString("traffic_controller_name");
                         String id=jsonObj.getString("opp_id");
-                        String password_=jsonObj.getString("password");
+//                        String password_=jsonObj.getString("password");
                         id_list.add(id);
 
                     } catch (JSONException e) {
@@ -341,7 +341,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             if(action.contains("name"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT  * FROM patient where phno='"+number_s+"'");
+                jsonArr=  common.send_req(ip,"c_qry=SELECT name FROM patient where phno='"+number_s+"'");
 
                 for (int i = 0; i < jsonArr.length(); i++)
                 {

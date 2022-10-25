@@ -174,7 +174,7 @@ public class login_signup extends AppCompatActivity {
             if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr = common.send_req(ip,"c_qry=SELECT * FROM patient");
+                jsonArr = common.send_req(ip,"c_qry=SELECT phno,password FROM patient");
                 phone_list.clear();
                 ph_pas_map.clear();
                 for (int i = 0; i < jsonArr.length(); i++)
