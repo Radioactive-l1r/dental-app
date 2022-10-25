@@ -256,8 +256,12 @@ public class patient_history extends AppCompatActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), patient_main.class));
-        overridePendingTransition(0,0);
+        Intent i = new Intent(patient_history.this, patient_main.class);
+//                            String strName = null;
+
+
+        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+        startActivity(i);
     }
 
     void feedback_dialog(String opp_id) {

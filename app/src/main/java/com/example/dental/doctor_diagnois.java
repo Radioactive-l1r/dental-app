@@ -93,7 +93,7 @@ public class doctor_diagnois extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /**send to db*/
-                d_advice=advice.getText().toString();
+                d_advice=advice.getText().toString().replace("'", "''");
 //                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
 //                Bitmap bitmap = bitmapDrawable.getBitmap();
 //                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -134,7 +134,7 @@ public class doctor_diagnois extends AppCompatActivity {
             try {
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContentResolver(),uri);
                 ByteArrayOutputStream stream=new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG,100,stream);
+                bitmap.compress(Bitmap.CompressFormat.JPEG,60,stream);
                 byte[] bytes=stream.toByteArray();
                 sImage= Base64.encodeToString(bytes,Base64.DEFAULT);
 
@@ -215,6 +215,14 @@ public class doctor_diagnois extends AppCompatActivity {
                 byte[] bytes2 = Base64.decode(sImage, Base64.DEFAULT);
                 Bitmap bitmap2 = BitmapFactory.decodeByteArray(bytes2, 0, bytes2.length);
                 pic.setImageBitmap(bitmap2);
+            }
+            //on submit go to doctor main
+            if(action.contains("insert"))
+            {   toast = Toast.makeText(doctor_diagnois.this, "SUBMITTED!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+                startActivity(new Intent(getApplicationContext(), doctor_main.class));
+                overridePendingTransition(0,0);
             }
         }
     }

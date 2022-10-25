@@ -81,6 +81,11 @@ public class login_signup extends AppCompatActivity {
                         Intent i = new Intent(login_signup.this, patient_main.class);
                         i.putExtra("phno", phno_s);
                         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+
+                        SharedPreferences sharedPreferences = this.getSharedPreferences("dental", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("phno", phno_s);
+                        editor.apply();
                         startActivity(i);
                     }
                     else

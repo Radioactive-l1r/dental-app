@@ -60,7 +60,9 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
         common.create_pd(patient_main.this);
 
-        number_s = getIntent().getStringExtra("phno");
+//        number_s = getIntent().getStringExtra("phno");
+        SharedPreferences sharedPreferences = this.getSharedPreferences("dental", MODE_PRIVATE);
+        number_s= sharedPreferences.getString("phno", "");
 
         calendar= Calendar.getInstance();;
         book=findViewById(R.id.book);
