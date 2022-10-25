@@ -93,7 +93,7 @@ public class doctor_diagnois extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /**send to db*/
-                d_advice=advice.getText().toString().replace("'", "''");
+                d_advice=advice.getText().toString().replace("'", "''").replace("\n","_");
 //                BitmapDrawable bitmapDrawable = (BitmapDrawable) pic.getDrawable();
 //                Bitmap bitmap = bitmapDrawable.getBitmap();
 //                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -192,8 +192,8 @@ public class doctor_diagnois extends AppCompatActivity {
                             try {
                                 jsonObj = jsonArr.getJSONObject(i);
                                 Log.d("appointments", "jarray: : "+jsonObj);
-                                p_problem=jsonObj.getString("problem");
-                                d_advice=jsonObj.getString("d_advice");
+                                p_problem=jsonObj.getString("problem").replace("_","\n");
+                                d_advice=jsonObj.getString("d_advice").replace("_","\n");
                                 sImage=jsonObj.getString("img");
                             } catch (JSONException e) {
                                 e.printStackTrace();

@@ -279,7 +279,7 @@ public class patient_history extends AppCompatActivity
             @Override
             public void onClick(View view) {
                 feed_back_s = feed.getText().toString();
-                feed_back_s = feed_back_s.replace("'", "''");
+                feed_back_s = feed_back_s.replace("'", "''").replace("\n","_");
                 if (TextUtils.isEmpty(feed_back_s)) {
                     toast = Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT);
                     toast.setGravity(Gravity.TOP, 0, 0);

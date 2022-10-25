@@ -76,7 +76,7 @@ public class doctor_main extends AppCompatActivity
                     name_s=jsonObj.getString("name");
                     date_s=jsonObj.getString("date_");
                     time=jsonObj.getString("time_");
-                    feedbacK_s=jsonObj.getString("feedback");
+                    feedbacK_s=jsonObj.getString("feedback").replace("_","\n");
                     Status_s=jsonObj.getString("status");
 
                     modelArrayList.add(new model(id,date_s,time,name_s,feedbacK_s, Status_s));

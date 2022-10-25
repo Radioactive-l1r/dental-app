@@ -179,7 +179,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             date_S = date.getText().toString();
             time_s  = time.getText().toString();
             problem_S = problem.getText().toString();
-            problem_S = problem_S.replace("'", "''");
+            problem_S = problem_S.replace("'", "''").replace("\n","_");
+            Toast.makeText(this, ""+problem_S, Toast.LENGTH_SHORT).show();
 
             if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
             {
@@ -189,7 +190,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             }
             else
             {
-                problem_S.replace(" ","_");
+             //   problem_S.replace(" ","_");
+
                 new bg("insert").execute();
                 d.dismiss();
                 toast = Toast.makeText(patient_main.this, "Appointment Booked", Toast.LENGTH_SHORT);
