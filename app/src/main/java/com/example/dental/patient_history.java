@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class patient_history extends AppCompatActivity
 {
   TextView name;
-  String ip,number_s;
+  String number_s;
   String opp_id_s, feed_back_s;
   adapter Adapeter;
   ArrayList<model> modelArrayList;
@@ -45,24 +45,22 @@ public class patient_history extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_history);
 
-        name =findViewById(R.id.name);
+        name = findViewById(R.id.name);
 
-        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
-        ip=sharedPreferences.getString("ip", "");
         common.create_pd(patient_history.this);
 
-        Bundle extras = getIntent().getExtras();
-        number_s= sharedPreferences.getString("phno", "");
-//        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
-        new bg("name").execute();
+        number_s = getIntent().getStringExtra("phno");
+        name.setText(getIntent().getStringExtra("name"));
 
-        rv=findViewById(R.id.rv);
-        modelArrayList=new ArrayList<>();
-        Adapeter=new adapter(modelArrayList);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getApplicationContext());
+        new bg("fetch").execute();
+
+        rv = findViewById(R.id.rv);
+        modelArrayList = new ArrayList<>();
+        Adapeter = new adapter(modelArrayList);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rv.setLayoutManager(layoutManager);
-        //recyclerView.setItemAnimator(new DefaultItemAnimator());
         rv.setAdapter(Adapeter);
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
     class bg extends AsyncTask<Object,Void,Void>
@@ -81,50 +79,26 @@ public class patient_history extends AppCompatActivity
 
         @Override
         protected Void doInBackground(Object... objects) {
-            if(action.contains("name"))
+            if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT name FROM patient where phno='"+number_s+"'");
-
-                for (int i = 0; i < jsonArr.length(); i++)
-                {
-                    JSONObject jsonObj = null;
-                    try {
-                        jsonObj = jsonArr.getJSONObject(i);
-                        Log.d("id", "jarray: : "+jsonObj);
-
-                        //String name_=jsonObj.getString("traffic_controller_name");
-                        String nameS=jsonObj.getString("name");
-                        name.setText(nameS);
-
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-
-                }
-            }
-          else   if(action.contains("fetch"))
-            {
-                JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id,date_,time_,problem,d_advice,status,feedback FROM appointment where phno='"+number_s+"'");
+                jsonArr=  common.send_req("c_qry=SELECT opp_id,date_,time_,problem,d_advice,status,feedback FROM appointment where phno='"+number_s+"'");
                 modelArrayList.clear();
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
                     JSONObject jsonObj = null;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
-                        Log.d("appointments", "jarray: : "+jsonObj);
 
-                        //String name_=jsonObj.getString("traffic_controller_name");
-                        String id=jsonObj.getString("opp_id");
-                        String date_=jsonObj.getString("date_").replace("_","/");
-                        String time_=jsonObj.getString("time_");
-                        String problem_=jsonObj.getString("problem");
-                        String d_advice_= jsonObj.getString("d_advice");
-                        String status=jsonObj.getString("status");
-                        String feed_back=jsonObj.getString("feedback");
+                        String id = jsonObj.getString("opp_id");
+                        String date_ = jsonObj.getString("date_").replace("_","/");
+                        String time_ = jsonObj.getString("time_");
+                        String problem_ = jsonObj.getString("problem");
+                        String d_advice_ = jsonObj.getString("d_advice");
+                        String status = jsonObj.getString("status");
+                        String feed_back = jsonObj.getString("feedback");
                         modelArrayList.add(new model(id,date_,time_,problem_,d_advice_,feed_back ,status));
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -132,12 +106,12 @@ public class patient_history extends AppCompatActivity
                 }
 
             }
-          else   if(action.contains("delete"))
-            {//DELETE FROM `appointment` WHERE opp_id='qwwq';
-                common.send_req(ip,"c_qry=DELETE FROM appointment where opp_id='"+opp_id_s+"'");
+            else if(action.contains("delete"))
+            {
+                common.send_req("c_qry=DELETE FROM appointment where opp_id='"+opp_id_s+"'");
             }
-          else if(action.contains("feedback")){
-              common.send_req(ip, "c_qry=UPDATE appointment SET feedback='"+feed_back_s+"' where opp_id='"+opp_id_s+"'");
+            else if(action.contains("feedback")){
+              common.send_req("c_qry=UPDATE appointment SET feedback='"+feed_back_s+"' where opp_id='"+opp_id_s+"'");
             }
             return null;
         }
@@ -147,10 +121,6 @@ public class patient_history extends AppCompatActivity
             super.onPostExecute(unused);
             common.dism();
             Adapeter.notifyDataSetChanged();
-            if(!action.contains("fetch"))
-            {
-                new bg("fetch").execute();
-            }
         }
     }
 
@@ -234,51 +204,43 @@ public class patient_history extends AppCompatActivity
             String da=modelArrayList.get(position).getDate()+" - "+modelArrayList.get(position).getTime();
             holder.date_time.setText(da);
             holder.problem.setText(modelArrayList.get(position).getProblem());
-            String few= holder.problem.getText().toString();
             String feed_back_value = modelArrayList.get(position).getFeedback_value();
             if(!feed_back_value.isEmpty()){
                 holder.feedback.setEnabled(false);
                 holder.feedback.setText("");
                 holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
             }
-            holder.delete.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     opp_id_s=modelArrayList.get(position).getId().toString();
-                     Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
-                     new bg("delete").execute();
-                 }
+            holder.delete.setOnClickListener(view -> {
+
+                opp_id_s=modelArrayList.get(position).getId();
+                modelArrayList.remove(position);
+                new bg("delete").execute();
             });
 
-            holder.feedback.setOnClickListener(new View.OnClickListener() {
-                 @Override
-                 public void onClick(View view) {
-                     opp_id_s=modelArrayList.get(position).getId().toString();
-                     feedback_dialog(opp_id_s);
-                 }
+            holder.feedback.setOnClickListener(view -> {
+
+                opp_id_s=modelArrayList.get(position).getId();
+                feedback_dialog(opp_id_s);
             });
 
            ;
-            holder.moreInfo.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String status=modelArrayList.get(position).getStatus().toString();
-                            if(status.contains("done"))
-                            {
-                                Intent i = new Intent(patient_history.this, doctor_diagnois.class);
-//                            String strName = null;
+            holder.moreInfo.setOnClickListener(view -> {
 
-                                i.putExtra("name",name.getText());
-                                i.putExtra("opp_id", modelArrayList.get(position).getId().toString());
-                                i.putExtra("status",modelArrayList.get(position).getStatus().toString());
-                                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                                startActivity(i);
-                            }else {
-                                Intent intent = new Intent(getApplicationContext(), medical_history.class);
-                                startActivity(intent);
-                            }
+                String status=modelArrayList.get(position).getStatus();
+                        if(status.contains("done"))
+                        {
+                            Intent i = new Intent(patient_history.this, doctor_diagnois.class);
 
-                }
+                            i.putExtra("name",name.getText());
+                            i.putExtra("opp_id", modelArrayList.get(position).getId());
+                            i.putExtra("status",modelArrayList.get(position).getStatus());
+                            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                            startActivity(i);
+                        }else {
+                            Intent intent = new Intent(getApplicationContext(), medical_history.class);
+                            startActivity(intent);
+                        }
+
             });
 
         }

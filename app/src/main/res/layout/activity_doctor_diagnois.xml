@@ -86,9 +86,9 @@
     <TextView
         android:id="@+id/diagnois"
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="300dp"
+        android:layout_marginTop="240dp"
         android:background="@drawable/text_bg"
         android:elevation="4dp"
         android:fontFamily="@font/urbanist_bold"
@@ -97,27 +97,28 @@
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/advice" />
+        app:layout_constraintTop_toBottomOf="@+id/advice"
+        tools:layout_editor_absoluteX="16dp" />
 
     <TextView
         android:id="@+id/upload"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/upload_image"
-        android:textSize="24sp"
+        android:layout_marginTop="20dp"
         android:fontFamily="@font/urbanist_bold"
+        android:text="@string/upload_image"
         android:textColor="@color/high"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/advice" />
 
     <FrameLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         app:layout_constraintBottom_toTopOf="@+id/diagnois"
-        app:layout_constraintTop_toBottomOf="@+id/upload"
+        app:layout_constraintTop_toBottomOf="@+id/advice"
         tools:layout_editor_absoluteX="0dp">
 
         <ImageView

@@ -43,8 +43,6 @@ public class doctor_diagnois extends AppCompatActivity {
     Toast toast;
     //    ImageView cam;
 
-    String image_data;
-
     private static final int pic_id = 123;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,6 +142,7 @@ public class doctor_diagnois extends AppCompatActivity {
                 byte[] bytes2= Base64.decode(sImage,Base64.DEFAULT);
                 Bitmap bitmap2= BitmapFactory.decodeByteArray(bytes2,0,bytes2.length);
                 pic.setImageBitmap(bitmap2);
+                upload.setVisibility(View.INVISIBLE);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -176,7 +175,7 @@ public class doctor_diagnois extends AppCompatActivity {
 //            String image = Base64.encodeToString(bytes , Base64.DEFAULT);
 //           // Log.d("image byte", "doInBackground: "+image);
                     if(action.contains("insert")) {
-                        common.send_req(ip, "c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
+                        common.send_req("c_qry=UPDATE appointment SET d_advice='" + d_advice + "',status='done' where opp_id='" + opp_id + "'");
                       /**bada bsdkaaaaaaaaaaaa*/
                        common.insert_diagnois(sImage,opp_id);
 
@@ -185,7 +184,7 @@ public class doctor_diagnois extends AppCompatActivity {
                     else  if(action.contains("fetch"))
                     {
                         JSONArray jsonArr;
-                        jsonArr=  common.send_req(ip,"c_qry=SELECT problem,d_advice,img FROM appointment where opp_id='"+opp_id+"'");
+                        jsonArr=  common.send_req("c_qry=SELECT problem,d_advice,img FROM appointment where opp_id='"+opp_id+"'");
 
                         for (int i = 0; i < jsonArr.length(); i++)
                         {
@@ -220,6 +219,11 @@ public class doctor_diagnois extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), doctor_main.class));
+        overridePendingTransition(0,0);
+    }
 
 }

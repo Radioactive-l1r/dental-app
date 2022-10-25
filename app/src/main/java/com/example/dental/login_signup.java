@@ -30,85 +30,70 @@ public class login_signup extends AppCompatActivity {
 
     TextView sign_up;
     Button login;
-    EditText phno,password;
-    String ip;
-    String name_s,phno_s,mail_s,password_s;
+    EditText phno, password;
+    String name_s, phno_s, mail_s, password_s;
     ArrayList<String> phone_list=new ArrayList<>();
-    Map<String, String> ph_pas_map = new HashMap<String, String>();
+    Map<String, String> ph_pas_map = new HashMap<>();
     Toast toast;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_signup);
 
-        phno=findViewById(R.id.phno);
-        password=findViewById(R.id.password);
+        phno = findViewById(R.id.phno);
+        password = findViewById(R.id.password);
 
-        sign_up=findViewById(R.id.sign_up);
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-            open_sign_dialog();
-            }
-        });
+        sign_up = findViewById(R.id.sign_up);
+        sign_up.setOnClickListener(view -> open_sign_dialog());
 
-        login=findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
+        login = findViewById(R.id.login);
+        login.setOnClickListener(view -> {
+
+            phno_s = phno.getText().toString();
+            password_s = password.getText().toString();
+
+            if(TextUtils.isEmpty(phno_s) || TextUtils.isEmpty(password_s))
             {
-                phno_s=phno.getText().toString();
-                password_s=password.getText().toString();
-                if(TextUtils.isEmpty(phno_s) || TextUtils.isEmpty(password_s))
-                {
-                    toast = Toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                }
-                /**doctor login*/
-                else if(phno_s.contains("0123456789") && password_s.contains("1234"))
-
-                {     startActivity(new Intent(getApplicationContext(), doctor_main.class));
-                    overridePendingTransition(0,0);
-                }
-                else if(!phone_list.contains(phno_s))
-                {
-                    toast = Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                }
-
-                else
-                {
-                        /* check if pasword matches*/
-                        String map_pas=ph_pas_map.get(phno_s);
-                        if(password_s.equals(map_pas))
-                        {
-                            Toast.makeText(login_signup.this, "logged in", Toast.LENGTH_SHORT).show();
-                            Intent i = new Intent(login_signup.this, patient_main.class);
-//                            String strName = null;
-                            i.putExtra("number", phno_s);
-                            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-
-                            sharedPreferences.edit().putString("phno", phno_s).commit();
-                            startActivity(i);
-                        }
-
-                        else
-                        {
-                            toast = Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT);
-                            toast.setGravity(Gravity.TOP, 0, 0);
-                            toast.show();
-                        }
-                }
+                toast = Toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+            }
+            // doctor login
+            else if(phno_s.contains("0123456789") && password_s.contains("1234"))
+            {
+                startActivity(new Intent(getApplicationContext(), doctor_main.class));
+                overridePendingTransition(0,0);
+            }
+            else if(!phone_list.contains(phno_s))
+            {
+                toast = Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+            }
+            else
+            {
+                    /* check if pasword matches*/
+                    String map_pas=ph_pas_map.get(phno_s);
+                    if(password_s.equals(map_pas))
+                    {
+                        Toast.makeText(login_signup.this, "logged in", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(login_signup.this, patient_main.class);
+                        i.putExtra("phno", phno_s);
+                        i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        toast = Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT);
+                        toast.setGravity(Gravity.TOP, 0, 0);
+                        toast.show();
+                    }
             }
         });
-        sharedPreferences.edit().putString("phno", "").commit();
+
         phno.setText("");
         password.setText("");
-        ip=sharedPreferences.getString("ip", "");
         common.create_pd(login_signup.this);
 
         new bg("fetch").execute();
@@ -117,47 +102,52 @@ public class login_signup extends AppCompatActivity {
 
     void open_sign_dialog()
     {
-        Dialog d=new Dialog(this);
+        Dialog d = new Dialog(this);
         d.setContentView(R.layout.sign_up_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        TextView sign_up ,name,phno,mail,password;
-        sign_up=d.findViewById(R.id.sign_up);
-        name=d.findViewById(R.id.name);
-        phno=d.findViewById(R.id.phno);
-        mail=d.findViewById(R.id.mail);
-        password=d.findViewById(R.id.password);
-        sign_up.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
+
+        TextView sign_up, name, phno, mail, password;
+        sign_up = d.findViewById(R.id.sign_up);
+        name = d.findViewById(R.id.name);
+        phno = d.findViewById(R.id.phno);
+        mail = d.findViewById(R.id.mail);
+        password = d.findViewById(R.id.password);
+
+        sign_up.setOnClickListener(view -> {
+
+            name_s = name.getText().toString().replace("'", "''");
+            password_s = password.getText().toString().replace("'", "''");
+            phno_s = phno.getText().toString();
+            mail_s = mail.getText().toString();
+
+            if(TextUtils.isEmpty(name_s)||TextUtils.isEmpty(password_s)||TextUtils.isEmpty(phno_s)||TextUtils.isEmpty(mail_s))
             {
-                name_s=name.getText().toString().replace("'", "''");
-                password_s=password.getText().toString().replace("'", "''");
-                phno_s=phno.getText().toString();
-                mail_s=mail.getText().toString();
-                if(TextUtils.isEmpty(name_s)||TextUtils.isEmpty(password_s)||TextUtils.isEmpty(phno_s)||TextUtils.isEmpty(mail_s))
-                {
-                    toast = Toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                }
-                else  if(phone_list.contains(phno_s))
-                {
-                    toast = Toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                }
-                else {
-                    new bg("insert").execute();
-                    d.dismiss();
-                }
+                toast = Toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+            }
+            else  if(phone_list.contains(phno_s))
+            {
+                toast = Toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+            }
+            else {
+                new bg("insert").execute();
+                d.dismiss();
+                toast = Toast.makeText(login_signup.this, "Sign Up Successful", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
             }
         });
+
         d.show();
     }
 
 
     class bg extends AsyncTask<Object,Void,Void>
-    {  private String action;
+    {
+        private String action;
 
         bg(String action) {
             this.action = action;
@@ -171,27 +161,24 @@ public class login_signup extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Object... objects) {
+
             if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr = common.send_req(ip,"c_qry=SELECT phno,password FROM patient");
+                jsonArr = common.send_req("c_qry=SELECT phno,password FROM patient");
                 phone_list.clear();
                 ph_pas_map.clear();
+
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
-                    JSONObject jsonObj = null;
+                    JSONObject jsonObj;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
-                        Log.d("patients", "jarray: : "+jsonObj);
 
-                        //String name_=jsonObj.getString("traffic_controller_name");
-                        String num_=jsonObj.getString("phno");
-                        String password_=jsonObj.getString("password");
+                        String num_ = jsonObj.getString("phno");
+                        String password_ = jsonObj.getString("password");
+
                         ph_pas_map.put(num_,password_);
-//                        if(num_.equals("sa") && password_.equals("sa"))
-//                        {
-//                            Log.d("compared", "doInBackground: ");
-//                        }
                         phone_list.add(num_);
 
                         } catch (JSONException e) {
@@ -202,7 +189,9 @@ public class login_signup extends AppCompatActivity {
             }
             else if(action.contains("insert"))
             {
-                common.send_req(ip,"c_qry=insert into patient(name,phno,mail,password) values ('"+name_s+"','"+phno_s+"','"+mail_s+"','"+password_s+"')");
+                common.send_req("c_qry=insert into patient(name,phno,mail,password) values ('"+name_s+"','"+phno_s+"','"+mail_s+"','"+password_s+"')");
+                phone_list.add(phno_s);
+                ph_pas_map.put(phno_s, password_s);
             }
 
             return null;
@@ -212,11 +201,7 @@ public class login_signup extends AppCompatActivity {
         protected void onPostExecute(Void unused)
         {
             super.onPostExecute(unused);
-        common.dism();
-            if(!action.contains("fetch"))
-            {
-                new bg("fetch").execute();
-            }
+            common.dism();
         }
     }
 

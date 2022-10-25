@@ -38,8 +38,7 @@ public class doctor_main extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_doctor_main);
-        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
-        ip=sharedPreferences.getString("ip", "");
+
         common.create_pd(doctor_main.this);
 
         modelArrayList=new ArrayList<>();
@@ -50,14 +49,11 @@ public class doctor_main extends AppCompatActivity
 
         rv.setAdapter(adaPTER);
 
-
-        //modelArrayList.add(new model("ds","S","","","AS", ""));
         new bg().execute();
     }
 
 
     class bg extends AsyncTask<Object,Void,Void>
-
     {
         @Override
         protected void onPreExecute() {
@@ -68,15 +64,13 @@ public class doctor_main extends AppCompatActivity
         @Override
         protected Void doInBackground(Object... objects) {
             JSONArray jsonArr;
-            jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id,name,date_,time_,feedback,status FROM appointment");
+            jsonArr=  common.send_req("c_qry=SELECT opp_id,name,date_,time_,feedback,status FROM appointment");
             modelArrayList.clear();
             for (int i = 0; i < jsonArr.length(); i++)
             {
-                JSONObject jsonObj = null;
+                JSONObject jsonObj;
                 try {
                     jsonObj = jsonArr.getJSONObject(i);
-                    Log.d("appointments", "jarray: : "+jsonObj);
-
 
                     String id=jsonObj.getString("opp_id");
                     name_s=jsonObj.getString("name");
@@ -87,11 +81,9 @@ public class doctor_main extends AppCompatActivity
 
                     modelArrayList.add(new model(id,date_s,time,name_s,feedbacK_s, Status_s));
 
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
 
             return null;
@@ -227,4 +219,10 @@ public class doctor_main extends AppCompatActivity
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        startActivity(new Intent(getApplicationContext(), login_signup.class));
+        overridePendingTransition(0,0);
+    }
 }

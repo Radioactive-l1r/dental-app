@@ -37,63 +37,48 @@ import java.util.Random;
 
 public class patient_main extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener {
 
-    String ip;
-    String number_s;
-    String names_S;
+    String number_s, names_S;
     TextView book,history;
     String age_type_S,date_S,time_s,problem_S,opp_id_S;
     Calendar calendar;
     int year,month,day;
+    int CalendarHour, CalendarMinute;
     TextView bookd,date,time;
     TimePickerDialog timePickerDialog;
-    int CalendarHour, CalendarMinute;
     ImageView logOut;
     TextView orthodontics, pub_health_dent, oral_med_rad, pedodontics, oral_max_sur;
     TextView oral_path, prosthodontics, peridontics, cons_endo;
     Toast toast;
 
     ArrayList<String> id_list=new ArrayList<>();
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_patient_main);
 
-        SharedPreferences sharedPreferences= getSharedPreferences("myPref", MODE_PRIVATE);
-        ip=sharedPreferences.getString("ip", "");
         common.create_pd(patient_main.this);
 
-        Bundle extras = getIntent().getExtras();
-        number_s= sharedPreferences.getString("phno", "");
-//        Toast.makeText(this, ""+number_s, Toast.LENGTH_SHORT).show();
+        number_s = getIntent().getStringExtra("phno");
 
-        calendar= Calendar.getInstance();
-        //name=findViewById(R.id.name);
+        calendar= Calendar.getInstance();;
         book=findViewById(R.id.book);
-        book.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                booK_dialog();
-            }
-        });
         history=findViewById(R.id.history);
-        history.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(patient_main.this, patient_history.class);
-                String strName = null;
-                i.putExtra("number", number_s);
-                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                startActivity(i);
-            }
+
+        book.setOnClickListener(view -> booK_dialog());
+
+        history.setOnClickListener(view -> {
+
+            Intent i = new Intent(patient_main.this, patient_history.class);
+            i.putExtra("phno", number_s);
+            i.putExtra("name", names_S);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(i);
         });
 
         logOut = findViewById(R.id.log_out);
-        logOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
+        logOut.setOnClickListener(view -> onBackPressed());
 
         orthodontics = findViewById(R.id.orthodontics);
         oral_med_rad = findViewById(R.id.oral_med_rad);
@@ -116,6 +101,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         cons_endo.setOnClickListener(view -> sendInfo(view));
 
         new bg("name").execute();
+        new bg("fetch").execute();
     }
 
     void sendInfo(View view){
@@ -125,107 +111,94 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         startActivity(intent);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     void booK_dialog()
     {
-
         //generate id of appointment
         genereate_id();
+
         Dialog d=new Dialog(this);
         d.setContentView(R.layout.book_dialog);
         d.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         EditText problem;
-        problem=d.findViewById(R.id.problem);
         TextView kid ,adult, elderly;
-        kid=d.findViewById(R.id.kid);
-        adult=d.findViewById(R.id.adult);
-        elderly=d.findViewById(R.id.elderly);
+
+        problem = d.findViewById(R.id.problem);
+        kid = d.findViewById(R.id.kid);
+        adult = d.findViewById(R.id.adult);
+        elderly = d.findViewById(R.id.elderly);
+        bookd=d.findViewById(R.id.book);
+        date=d.findViewById(R.id.date);
+        time=d.findViewById(R.id.time);
+
         kid.setBackgroundResource(R.drawable.text_bg);
         kid.setTextColor(Color.WHITE);
         age_type_S=kid.getText().toString();
 
+        kid.setOnClickListener(view -> {
 
-        bookd=d.findViewById(R.id.book);
-        date=d.findViewById(R.id.date);
-        time=d.findViewById(R.id.time);
-        kid.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view) {
-                kid.setBackgroundResource(R.drawable.text_bg);
-                kid.setTextColor(Color.WHITE);
-                age_type_S=kid.getText().toString();
-                adult.setBackgroundResource(R.drawable.age_deselect);
-                adult.setTextColor(R.color.teal_700);
-                elderly.setBackgroundResource(R.drawable.age_deselect);
-                elderly.setTextColor(R.color.teal_700);
-            }
+            kid.setBackgroundResource(R.drawable.text_bg);
+            kid.setTextColor(Color.WHITE);
+            age_type_S=kid.getText().toString();
+            adult.setBackgroundResource(R.drawable.age_deselect);
+            adult.setTextColor(getResources().getColor(R.color.teal_700));
+            elderly.setBackgroundResource(R.drawable.age_deselect);
+            elderly.setTextColor(getResources().getColor(R.color.teal_700));
         });
 
-        adult.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view) {
-                adult.setBackgroundResource(R.drawable.text_bg);
-                adult.setTextColor(Color.WHITE);
-                age_type_S=adult.getText().toString();
-                kid.setBackgroundResource(R.drawable.age_deselect);
-                kid.setTextColor(R.color.teal_700);
-                elderly.setBackgroundResource(R.drawable.age_deselect);
-                elderly.setTextColor(R.color.teal_700);
-            }
+        adult.setOnClickListener(view -> {
+
+            adult.setBackgroundResource(R.drawable.text_bg);
+            adult.setTextColor(Color.WHITE);
+            age_type_S=adult.getText().toString();
+            kid.setBackgroundResource(R.drawable.age_deselect);
+            kid.setTextColor(getResources().getColor(R.color.teal_700));
+            elderly.setBackgroundResource(R.drawable.age_deselect);
+            elderly.setTextColor(getResources().getColor(R.color.teal_700));
         });
-        elderly.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("ResourceAsColor")
-            @Override
-            public void onClick(View view) {
-                elderly.setBackgroundResource(R.drawable.text_bg);
-                elderly.setTextColor(Color.WHITE);
-                age_type_S=elderly.getText().toString();
-                kid.setBackgroundResource(R.drawable.age_deselect);
-                kid.setTextColor(R.color.teal_700);
-                adult.setBackgroundResource(R.drawable.age_deselect);
-                adult.setTextColor(R.color.teal_700);
-            }
+
+        elderly.setOnClickListener(view -> {
+
+            elderly.setBackgroundResource(R.drawable.text_bg);
+            elderly.setTextColor(Color.WHITE);
+            age_type_S=elderly.getText().toString();
+            kid.setBackgroundResource(R.drawable.age_deselect);
+            kid.setTextColor(getResources().getColor(R.color.teal_700));
+            adult.setBackgroundResource(R.drawable.age_deselect);
+            adult.setTextColor(getResources().getColor(R.color.teal_700));
         });
-        date.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.N)
-            @Override
-            public void onClick(View view) {
-                open_date_picekr();
-            }
-        });
-        time.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                open_time_picker();
-            }
-        });
-        bookd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
+
+        date.setOnClickListener(view -> open_date_picekr());
+        time.setOnClickListener(view -> open_time_picker());
+
+        bookd.setOnClickListener(view -> {
+
+            date_S = date.getText().toString();
+            time_s  = time.getText().toString();
+            problem_S = problem.getText().toString();
+            problem_S = problem_S.replace("'", "''");
+
+            if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
             {
-                date_S=date.getText().toString();
-                time_s=time.getText().toString();
-                problem_S=problem.getText().toString();
-                problem_S = problem_S.replace("'", "''");
-                if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
-                {
-                    toast = Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                }
-                else
-                {
-                    problem_S.replace(" ","_");
-                    new bg("insert").execute();
-                    d.dismiss();
-                }
-//                Toast.makeText(patient_main.this, ""+date_S, Toast.LENGTH_SHORT).show();
+                toast = Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
+            }
+            else
+            {
+                problem_S.replace(" ","_");
+                new bg("insert").execute();
+                d.dismiss();
+                toast = Toast.makeText(patient_main.this, "Appointment Booked", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.show();
             }
         });
 
         d.show();
     }
+
     @RequiresApi(api = Build.VERSION_CODES.N)
     void open_date_picekr()
     {
@@ -241,53 +214,41 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         year=i;
         String d=day+"_"+month+"_"+year;
         date.setText(d);
-      //  fil(date_tv.getText().toString());
     }
     void open_time_picker()
     {
         final int[] hr = {0};
         final int[] mn = {0};
-        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
-            @Override
-            public void onTimeSet(TimePicker timePicker, int h, int m) {
-                hr[0] =h;
-                mn[0] =m;
-                String timess= h+":"+m;
-                time.setText(timess);
-                String am_pm = "";
-                String format;
-//                Calendar datetime = Calendar.getInstance();
-//                datetime.set(Calendar.HOUR_OF_DAY, h);
-//                datetime.set(Calendar.MINUTE, m);
-//
-//                if (datetime.get(Calendar.AM_PM) == Calendar.AM)
-//                    am_pm = "AM";
-//                else if (datetime.get(Calendar.AM_PM) == Calendar.PM)
-//                    am_pm = "PM";
-//
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, h, m) -> {
 
-                calendar = Calendar.getInstance();
-                CalendarHour = calendar.get(Calendar.HOUR_OF_DAY);
-                CalendarMinute = calendar.get(Calendar.MINUTE);
-                if (h == 0) {
-                    h += 12;
-                    format = "AM";
-                }
-                else if (h == 12) {
-                    format = "PM";
-                }
-                else if (h > 12) {
-                    h -= 12;
-                    format = "PM";
-                }
-                else {
-                    format = "AM";
-                }
+            hr[0] =h;
+            mn[0] =m;
+            String timess= h+":"+m;
+            time.setText(timess);
+            String format;
 
-                time.setText(h+":"+m+":"+format);
-                //  a_time_ET.setText(time);
+            calendar = Calendar.getInstance();
+            CalendarHour = calendar.get(Calendar.HOUR_OF_DAY);
+            CalendarMinute = calendar.get(Calendar.MINUTE);
+
+            if (h == 0) {
+                h += 12;
+                format = "AM";
             }
+            else if (h == 12) {
+                format = "PM";
+            }
+            else if (h > 12) {
+                h -= 12;
+                format = "PM";
+            }
+            else {
+                format = "AM";
+            }
+
+            time.setText(h+":"+m+":"+format);
         };
+
         timePickerDialog =new TimePickerDialog(patient_main.this, AlertDialog.THEME_HOLO_LIGHT,onTimeSetListener, CalendarHour, CalendarMinute,false);
         timePickerDialog.show();
     }
@@ -308,15 +269,16 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
         @Override
         protected Void doInBackground(Object... objects) {
-            if (action.contains("insert"))
-            {   String id=number_s+date_S+time_s;
-                common.send_req(ip,"c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
 
+            if (action.contains("insert"))
+            {
+                String id=number_s+date_S+time_s;
+                common.send_req("c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
             }
             if(action.contains("fetch"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT opp_id FROM appointment");
+                jsonArr=  common.send_req("c_qry=SELECT opp_id FROM appointment");
                 id_list.clear();
 
                 for (int i = 0; i < jsonArr.length(); i++)
@@ -324,11 +286,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                     JSONObject jsonObj = null;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
-                        Log.d("id", "jarray: : "+jsonObj);
 
-                        //String name_=jsonObj.getString("traffic_controller_name");
-                        String id=jsonObj.getString("opp_id");
-//                        String password_=jsonObj.getString("password");
+                        String id = jsonObj.getString("opp_id");
                         id_list.add(id);
 
                     } catch (JSONException e) {
@@ -341,25 +300,19 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             if(action.contains("name"))
             {
                 JSONArray jsonArr;
-                jsonArr=  common.send_req(ip,"c_qry=SELECT name FROM patient where phno='"+number_s+"'");
+                jsonArr=  common.send_req("c_qry=SELECT name FROM patient where phno='"+number_s+"'");
 
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
-                    JSONObject jsonObj = null;
+                    JSONObject jsonObj;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
-                        Log.d("id", "jarray: : "+jsonObj);
-
-                        //String name_=jsonObj.getString("traffic_controller_name");
-                        String nameS=jsonObj.getString("name");
-                        //name.setText(nameS);
-                        names_S=nameS;
+                        names_S = jsonObj.getString("name");
 
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             }
             return null;
@@ -369,14 +322,11 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             common.dism();
-            if(!action.contains("fetch"))
-            {
-                new bg("fetch").execute();
-            }
         }
     }
      void genereate_id()
-    {/**generate again if id already exists*/
+    {
+        /**generate again if id already exists*/
 
         String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random RANDOM = new Random();
@@ -385,10 +335,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         for (int i = 0; i < 4; i++)
         {
             sb.append(DATA.charAt(RANDOM.nextInt(DATA.length())));
-
             if(i==3)
             {
-//                Log.d("random", "generated_id=: "+sb.toString());
                 String g_id=sb.toString();
                 check_id_availiblty(g_id);
             }
@@ -399,15 +347,12 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     {
             if(id_list.contains(id))
             {
-//                Log.d("random", "generating new id> ");
                 genereate_id();
             }
             else
             {
-                /**,....set id**/
-//                Log.d("random", "not generatinf , but id_seted: "+id);
-               // id_ET.setText(id);
                 opp_id_S=id;
+                id_list.add(id);
             }
 
     }
