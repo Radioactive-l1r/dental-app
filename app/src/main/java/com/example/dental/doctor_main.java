@@ -7,19 +7,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,12 +24,12 @@ import java.util.ArrayList;
 
 public class doctor_main extends AppCompatActivity
 {
-    String name_s,date_s,time,_S,id_s,feedbacK_s ,Status_s;
-    String ip;
+    String name_s,date_s,time,feedbacK_s ,Status_s;
 
     ArrayList<model> modelArrayList;
     RecyclerView rv;
     AdaPTER adaPTER;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -158,7 +154,7 @@ public class doctor_main extends AppCompatActivity
         }
 
         public class MyViewHoder extends RecyclerView.ViewHolder {
-            TextView tim_date,proble,feedback,more,index;
+            TextView tim_date,proble,feedback,more;
             public MyViewHoder(@NonNull View itemView) {
 
                 super(itemView);
@@ -183,30 +179,21 @@ public class doctor_main extends AppCompatActivity
             holder.tim_date.setText(da);
             holder.proble.setText(modelArrayList.get(position).getName());
 
-            /**open diagnose page*/
-            holder.more.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
+            /*open diagnose page*/
+            holder.more.setOnClickListener(view -> {
 
-                    Intent i = new Intent(doctor_main.this, doctor_diagnois.class);
-//                            String strName = null;
-
-                    i.putExtra("name", modelArrayList.get(position).getName().toString());
-                    i.putExtra("opp_id", modelArrayList.get(position).getId().toString());
-                    i.putExtra("status",modelArrayList.get(position).getStatus().toString());
-                    i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
-                    startActivity(i);
-                }
+                Intent i = new Intent(doctor_main.this, doctor_diagnois.class);
+                i.putExtra("name", modelArrayList.get(position).getName());
+                i.putExtra("opp_id", modelArrayList.get(position).getId());
+                i.putExtra("status",modelArrayList.get(position).getStatus());
+                i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(i);
             });
-            holder.feedback.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    //open feedback dialog
-                    String fb=modelArrayList.get(position).getFeedback().toString();
+            holder.feedback.setOnClickListener(view -> {
+                //open feedback dialog
+                String fb=modelArrayList.get(position).getFeedback();
+                open_feedbac(fb);
 
-                  open_feedbac(fb);
-
-                }
             });
 
         }

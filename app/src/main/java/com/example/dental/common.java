@@ -70,7 +70,6 @@ public class common {
 
         } catch (IOException | JSONException e) {
             e.printStackTrace();
-            Log.d("er", "onCreate: "+e);
         }
         return jsonArr ;
     }

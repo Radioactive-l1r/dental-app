@@ -10,9 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -35,6 +33,7 @@ public class login_signup extends AppCompatActivity {
     ArrayList<String> phone_list=new ArrayList<>();
     Map<String, String> ph_pas_map = new HashMap<>();
     Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -68,7 +67,7 @@ public class login_signup extends AppCompatActivity {
             else if(!phone_list.contains(phno_s))
             {
                 toast = Toast.makeText(login_signup.this, "user doesn't exist", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
             else
@@ -91,7 +90,7 @@ public class login_signup extends AppCompatActivity {
                     else
                     {
                         toast = Toast.makeText(login_signup.this, "Incorrect password!", Toast.LENGTH_SHORT);
-                        toast.setGravity(Gravity.TOP, 0, 0);
+                        toast.setGravity(Gravity.CENTER, 0, 0);
                         toast.show();
                     }
             }
@@ -128,20 +127,20 @@ public class login_signup extends AppCompatActivity {
             if(TextUtils.isEmpty(name_s)||TextUtils.isEmpty(password_s)||TextUtils.isEmpty(phno_s)||TextUtils.isEmpty(mail_s))
             {
                 toast = Toast.makeText(login_signup.this, "Some fields are empty!", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
             else  if(phone_list.contains(phno_s))
             {
                 toast = Toast.makeText(login_signup.this, "User already exists! ", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
             else {
                 new bg("insert").execute();
                 d.dismiss();
                 toast = Toast.makeText(login_signup.this, "Sign Up Successful", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
         });

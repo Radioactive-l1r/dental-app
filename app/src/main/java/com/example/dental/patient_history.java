@@ -8,13 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,12 +31,12 @@ import java.util.ArrayList;
 public class patient_history extends AppCompatActivity
 {
   TextView name;
-  String number_s;
-  String opp_id_s, feed_back_s;
+  String number_s, opp_id_s, feed_back_s;
   adapter Adapeter;
   ArrayList<model> modelArrayList;
   RecyclerView rv;
   Toast toast;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -86,7 +84,7 @@ public class patient_history extends AppCompatActivity
                 modelArrayList.clear();
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
-                    JSONObject jsonObj = null;
+                    JSONObject jsonObj;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
 
@@ -155,10 +153,6 @@ public class patient_history extends AppCompatActivity
             return problem;
         }
 
-        public String getD_advice() {
-            return d_advice;
-        }
-
         public String getFeedback_value() {
             return feedback_value;
         }
@@ -205,11 +199,13 @@ public class patient_history extends AppCompatActivity
             holder.date_time.setText(da);
             holder.problem.setText(modelArrayList.get(position).getProblem());
             String feed_back_value = modelArrayList.get(position).getFeedback_value();
+
             if(!feed_back_value.isEmpty()){
                 holder.feedback.setEnabled(false);
                 holder.feedback.setText("");
                 holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
             }
+
             holder.delete.setOnClickListener(view -> {
 
                 opp_id_s=modelArrayList.get(position).getId();
@@ -223,7 +219,6 @@ public class patient_history extends AppCompatActivity
                 feedback_dialog(opp_id_s);
             });
 
-           ;
             holder.moreInfo.setOnClickListener(view -> {
 
                 String status=modelArrayList.get(position).getStatus();
@@ -257,9 +252,6 @@ public class patient_history extends AppCompatActivity
     public void onBackPressed() {
         super.onBackPressed();
         Intent i = new Intent(patient_history.this, patient_main.class);
-//                            String strName = null;
-
-
         i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
         startActivity(i);
     }
@@ -275,23 +267,20 @@ public class patient_history extends AppCompatActivity
         feed = d.findViewById(R.id.feedback);
         feedSubmit = d.findViewById(R.id.feedSubmit);
 
-        feedSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                feed_back_s = feed.getText().toString();
-                feed_back_s = feed_back_s.replace("'", "''").replace("\n","_");
-                if (TextUtils.isEmpty(feed_back_s)) {
-                    toast = Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                } else {
-                    opp_id_s = opp_id;
-                    new bg("feedback").execute();
-                    toast = Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT);
-                    toast.setGravity(Gravity.TOP, 0, 0);
-                    toast.show();
-                    d.dismiss();
-                }
+        feedSubmit.setOnClickListener(view -> {
+            feed_back_s = feed.getText().toString();
+            feed_back_s = feed_back_s.replace("'", "''").replace("\n","_");
+            if (TextUtils.isEmpty(feed_back_s)) {
+                toast = Toast.makeText(patient_history.this, "feedback is empty!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+            } else {
+                opp_id_s = opp_id;
+                new bg("feedback").execute();
+                toast = Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT);
+                toast.setGravity(Gravity.CENTER, 0, 0);
+                toast.show();
+                d.dismiss();
             }
         });
 

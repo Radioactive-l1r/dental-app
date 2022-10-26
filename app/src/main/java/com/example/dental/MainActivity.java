@@ -13,6 +13,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView home;
     TextView refresh;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

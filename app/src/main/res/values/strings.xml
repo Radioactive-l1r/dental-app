@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">dental</string>
+    <string name="app_name">Orthoclue</string>
     <string name="login">Login</string>
     <string name="doctor_patient_login">User Login</string>
     <string name="don_t_have_an_account_sign_up">Don\'t have an account? SIGN UP</string>

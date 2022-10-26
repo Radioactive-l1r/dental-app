@@ -12,7 +12,6 @@ import android.widget.AdapterViewFlipper;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class DepartmentInfo extends AppCompatActivity {
 
@@ -32,7 +31,6 @@ public class DepartmentInfo extends AppCompatActivity {
         headerInfo = findViewById(R.id.headerInfo);
         headerInfo.setText(""+info);
 
-        String infoValue;
         if(info.equals("Orthodontics")){
             images = new int[]{R.drawable.ortho_1, R.drawable.ortho_2, R.drawable.ortho_3, R.drawable.ortho_4, R.drawable.ortho_5};
         }else if(info.equals("Oral Medicine and Radiology")){

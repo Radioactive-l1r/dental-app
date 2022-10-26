@@ -3,7 +3,6 @@ package com.example.dental;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -16,15 +15,12 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -38,12 +34,11 @@ import java.util.Random;
 public class patient_main extends AppCompatActivity implements  DatePickerDialog.OnDateSetListener {
 
     String number_s, names_S;
-    TextView book,history;
     String age_type_S,date_S,time_s,problem_S,opp_id_S;
+    TextView book,history,bookd,date,time;
     Calendar calendar;
     int year,month,day;
     int CalendarHour, CalendarMinute;
-    TextView bookd,date,time;
     TimePickerDialog timePickerDialog;
     ImageView logOut;
     TextView orthodontics, pub_health_dent, oral_med_rad, pedodontics, oral_max_sur;
@@ -60,11 +55,10 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
         common.create_pd(patient_main.this);
 
-//        number_s = getIntent().getStringExtra("phno");
         SharedPreferences sharedPreferences = this.getSharedPreferences("dental", MODE_PRIVATE);
         number_s= sharedPreferences.getString("phno", "");
 
-        calendar= Calendar.getInstance();;
+        calendar= Calendar.getInstance();
         book=findViewById(R.id.book);
         history=findViewById(R.id.history);
 
@@ -92,15 +86,15 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         cons_endo = findViewById(R.id.cons_endo);
         peridontics = findViewById(R.id.peridontics);
 
-        orthodontics.setOnClickListener(view -> sendInfo(view));
-        oral_med_rad.setOnClickListener(view -> sendInfo(view));
-        pub_health_dent.setOnClickListener(view -> sendInfo(view));
-        prosthodontics.setOnClickListener(view -> sendInfo(view));
-        oral_path.setOnClickListener(view -> sendInfo(view));
-        oral_max_sur.setOnClickListener(view -> sendInfo(view));
-        pedodontics.setOnClickListener(view -> sendInfo(view));
-        peridontics.setOnClickListener(view -> sendInfo(view));
-        cons_endo.setOnClickListener(view -> sendInfo(view));
+        orthodontics.setOnClickListener(this::sendInfo);
+        oral_med_rad.setOnClickListener(this::sendInfo);
+        pub_health_dent.setOnClickListener(this::sendInfo);
+        prosthodontics.setOnClickListener(this::sendInfo);
+        oral_path.setOnClickListener(this::sendInfo);
+        oral_max_sur.setOnClickListener(this::sendInfo);
+        pedodontics.setOnClickListener(this::sendInfo);
+        peridontics.setOnClickListener(this::sendInfo);
+        cons_endo.setOnClickListener(this::sendInfo);
 
         new bg("name").execute();
         new bg("fetch").execute();
@@ -185,17 +179,15 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
             {
                 toast = Toast.makeText(patient_main.this, "Some fields are empty!", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
             else
             {
-             //   problem_S.replace(" ","_");
-
                 new bg("insert").execute();
                 d.dismiss();
                 toast = Toast.makeText(patient_main.this, "Appointment Booked", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
         });
@@ -221,12 +213,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     }
     void open_time_picker()
     {
-        final int[] hr = {0};
-        final int[] mn = {0};
         TimePickerDialog.OnTimeSetListener onTimeSetListener = (timePicker, h, m) -> {
 
-            hr[0] =h;
-            mn[0] =m;
             String timess= h+":"+m;
             time.setText(timess);
             String format;
@@ -276,7 +264,6 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
             if (action.contains("insert"))
             {
-                String id=number_s+date_S+time_s;
                 common.send_req("c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
             }
             if(action.contains("fetch"))
@@ -287,7 +274,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
                 for (int i = 0; i < jsonArr.length(); i++)
                 {
-                    JSONObject jsonObj = null;
+                    JSONObject jsonObj;
                     try {
                         jsonObj = jsonArr.getJSONObject(i);
 
@@ -330,7 +317,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
     }
      void genereate_id()
     {
-        /**generate again if id already exists*/
+        /* generate again if id already exists*/
 
         String DATA = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
         Random RANDOM = new Random();
