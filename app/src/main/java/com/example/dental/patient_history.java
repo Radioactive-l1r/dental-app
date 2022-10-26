@@ -2,6 +2,7 @@ package com.example.dental;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.percentlayout.widget.PercentRelativeLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -160,6 +161,10 @@ public class patient_history extends AppCompatActivity
         public String getStatus() {
             return status;
         }
+
+        public void setFeedBack(String feed_back_s) {
+            this.feedback_value = feed_back_s;
+        }
     }
 
     class adapter extends RecyclerView.Adapter<adapter.MyViewHolder>
@@ -193,7 +198,7 @@ public class patient_history extends AppCompatActivity
         }
 
         @Override
-        public void onBindViewHolder(@NonNull adapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
+        public void onBindViewHolder(@NonNull MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
             String da=modelArrayList.get(position).getDate()+" - "+modelArrayList.get(position).getTime();
             holder.date_time.setText(da);
@@ -204,6 +209,12 @@ public class patient_history extends AppCompatActivity
                 holder.feedback.setEnabled(false);
                 holder.feedback.setText("");
                 holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
+                holder.feedback.setPadding(45, 25, 45, 25);
+            }else{
+                holder.feedback.setEnabled(true);
+                holder.feedback.setText(getResources().getString(R.string.leave_a_review));
+                holder.feedback.setBackgroundResource(R.drawable.text_bg);
+                holder.feedback.setPadding(45, 25, 45, 25);
             }
 
             holder.delete.setOnClickListener(view -> {
@@ -216,7 +227,7 @@ public class patient_history extends AppCompatActivity
             holder.feedback.setOnClickListener(view -> {
 
                 opp_id_s=modelArrayList.get(position).getId();
-                feedback_dialog(opp_id_s, holder);
+                feedback_dialog(opp_id_s, modelArrayList, position);
             });
 
             holder.moreInfo.setOnClickListener(view -> {
@@ -256,7 +267,7 @@ public class patient_history extends AppCompatActivity
         startActivity(i);
     }
 
-    void feedback_dialog(String opp_id, adapter.MyViewHolder holder) {
+    void feedback_dialog(String opp_id, ArrayList<model> modelArrayList, int position) {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.feedback_dialog);
@@ -276,14 +287,12 @@ public class patient_history extends AppCompatActivity
                 toast.show();
             } else {
                 opp_id_s = opp_id;
+                modelArrayList.get(position).setFeedBack(feed_back_s);
                 new bg("feedback").execute();
                 toast = Toast.makeText(patient_history.this, "feedback Sent!", Toast.LENGTH_SHORT);
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 d.dismiss();
-                holder.feedback.setEnabled(false);
-                holder.feedback.setText("");
-                holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
             }
         });
 
