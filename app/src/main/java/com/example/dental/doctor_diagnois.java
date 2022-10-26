@@ -177,12 +177,4 @@ public class doctor_diagnois extends AppCompatActivity {
             }
         }
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        startActivity(new Intent(getApplicationContext(), doctor_main.class));
-        overridePendingTransition(0,0);
-    }
-
 }

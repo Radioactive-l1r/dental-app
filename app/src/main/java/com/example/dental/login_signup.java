@@ -55,7 +55,7 @@ public class login_signup extends AppCompatActivity {
             if(TextUtils.isEmpty(phno_s) || TextUtils.isEmpty(password_s))
             {
                 toast = Toast.makeText(login_signup.this, "some fields are empty !", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.TOP, 0, 0);
+                toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
             }
             // doctor login

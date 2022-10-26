@@ -109,7 +109,7 @@ public class patient_history extends AppCompatActivity
                 common.send_req("c_qry=DELETE FROM appointment where opp_id='"+opp_id_s+"'");
             }
             else if(action.contains("feedback")){
-              common.send_req("c_qry=UPDATE appointment SET feedback='"+feed_back_s+"' where opp_id='"+opp_id_s+"'");
+                common.send_req("c_qry=UPDATE appointment SET feedback='"+feed_back_s+"' where opp_id='"+opp_id_s+"'");
             }
             return null;
         }
@@ -216,7 +216,7 @@ public class patient_history extends AppCompatActivity
             holder.feedback.setOnClickListener(view -> {
 
                 opp_id_s=modelArrayList.get(position).getId();
-                feedback_dialog(opp_id_s);
+                feedback_dialog(opp_id_s, holder);
             });
 
             holder.moreInfo.setOnClickListener(view -> {
@@ -256,7 +256,7 @@ public class patient_history extends AppCompatActivity
         startActivity(i);
     }
 
-    void feedback_dialog(String opp_id) {
+    void feedback_dialog(String opp_id, adapter.MyViewHolder holder) {
 
         Dialog d = new Dialog(this);
         d.setContentView(R.layout.feedback_dialog);
@@ -281,6 +281,9 @@ public class patient_history extends AppCompatActivity
                 toast.setGravity(Gravity.CENTER, 0, 0);
                 toast.show();
                 d.dismiss();
+                holder.feedback.setEnabled(false);
+                holder.feedback.setText("");
+                holder.feedback.setBackgroundResource(R.drawable.checkbox_on_background);
             }
         });
 
