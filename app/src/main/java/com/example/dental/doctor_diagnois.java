@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
@@ -66,8 +67,12 @@ public class doctor_diagnois extends AppCompatActivity {
         diagonois_tx.setOnClickListener(view -> {
             /* send to db*/
             d_advice=advice.getText().toString().replace("'", "''").replace("\n","_");
-            new bg("insert").execute();
-
+            if(TextUtils.isEmpty(d_advice))
+            {
+                Toast.makeText(this, "Some fields are empty!", Toast.LENGTH_SHORT).show();
+            }else {
+                new bg("insert").execute();
+            }
         });
 
         problem_tv=findViewById(R.id.problem);

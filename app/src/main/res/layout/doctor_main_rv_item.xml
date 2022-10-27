@@ -64,10 +64,10 @@
             android:layout_alignParentBottom="true"
             android:layout_marginHorizontal="10dp"
             android:layout_marginBottom="5dp"
-            android:text="@string/diagnose"
-            android:textSize="20sp"
+            android:fontFamily="@font/urbanist_bold"
+            android:text="Diagnosis"
             android:textColor="@color/high"
-            android:fontFamily="@font/urbanist_bold"/>
+            android:textSize="20sp" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
