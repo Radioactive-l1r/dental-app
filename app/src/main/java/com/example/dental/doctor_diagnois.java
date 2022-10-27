@@ -79,6 +79,7 @@ public class doctor_diagnois extends AppCompatActivity {
         new bg("fetch").execute();
         if(status.contains("done"))
         {
+            advice.setFocusable(false);
             advice.setClickable(false);
             diagonois_tx.setVisibility(View.INVISIBLE);
             upload.setVisibility(View.INVISIBLE);
