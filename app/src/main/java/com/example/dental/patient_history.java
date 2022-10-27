@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
 public class patient_history extends AppCompatActivity
 {
   TextView name;
-  String number_s, opp_id_s, feed_back_s;
+  String  name_S, number_s, opp_id_s, feed_back_s;
   adapter Adapeter;
   ArrayList<model> modelArrayList;
   RecyclerView rv;
@@ -48,8 +49,11 @@ public class patient_history extends AppCompatActivity
 
         common.create_pd(patient_history.this);
 
-        number_s = getIntent().getStringExtra("phno");
-        name.setText(getIntent().getStringExtra("name"));
+        SharedPreferences sharedPreferences = this.getSharedPreferences("dental", MODE_PRIVATE);
+        number_s= sharedPreferences.getString("phno", "");
+
+        name_S=sharedPreferences.getString("name","");
+        name.setText(name_S);
 
         new bg("fetch").execute();
 
@@ -120,6 +124,10 @@ public class patient_history extends AppCompatActivity
             super.onPostExecute(unused);
             common.dism();
             Adapeter.notifyDataSetChanged();
+            if(!action.contains("fetch"))
+            {
+                new bg("fetch").execute();
+            }
         }
     }
 
@@ -220,7 +228,8 @@ public class patient_history extends AppCompatActivity
             holder.delete.setOnClickListener(view -> {
 
                 opp_id_s=modelArrayList.get(position).getId();
-                modelArrayList.remove(position);
+                Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
+                //  modelArrayList.remove(position);
                 new bg("delete").execute();
             });
 

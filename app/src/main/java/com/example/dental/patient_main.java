@@ -301,6 +301,8 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
                         names_S = jsonObj.getString("name");
 
 
+
+
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -313,6 +315,14 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
         protected void onPostExecute(Void unused) {
             super.onPostExecute(unused);
             common.dism();
+            //save the name in sharedprefernces
+            if(action.contains("name"))
+            {
+                SharedPreferences sharedPreferences = patient_main.this.getSharedPreferences("dental", MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("name", names_S);
+                editor.apply();
+            }
         }
     }
      void genereate_id()
