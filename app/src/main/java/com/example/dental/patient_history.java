@@ -126,7 +126,7 @@ public class patient_history extends AppCompatActivity
             Adapeter.notifyDataSetChanged();
             if(!action.contains("fetch"))
             {
-                new bg("fetch").execute();
+            new bg("fetch").execute();
             }
         }
     }
