@@ -34,7 +34,7 @@ public class doctor_diagnois extends AppCompatActivity {
     EditText advice;
     ImageView pic;
     Toast toast;
-
+    Bundle extras;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +42,7 @@ public class doctor_diagnois extends AppCompatActivity {
 
         common.create_pd(doctor_diagnois.this);
 
-        Bundle extras = getIntent().getExtras();
+         extras = getIntent().getExtras();
         opp_id=extras.getString("opp_id");
         name=extras.getString("name");
         status=extras.getString("status");
@@ -181,6 +181,24 @@ public class doctor_diagnois extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), doctor_main.class));
                 overridePendingTransition(0,0);
             }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        String user=extras.getString("who");
+        if(user.contains("patient"))
+        {
+            Intent i = new Intent(doctor_diagnois.this, patient_history.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(i);
+        }
+        else
+        {
+            Intent i = new Intent(doctor_diagnois.this, doctor_main.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(i);
         }
     }
 }

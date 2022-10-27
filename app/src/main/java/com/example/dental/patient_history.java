@@ -127,6 +127,7 @@ public class patient_history extends AppCompatActivity
             if(!action.contains("fetch"))
             {
             new bg("fetch").execute();
+
             }
         }
     }
@@ -245,7 +246,7 @@ public class patient_history extends AppCompatActivity
                         if(status.contains("done"))
                         {
                             Intent i = new Intent(patient_history.this, doctor_diagnois.class);
-
+                            i.putExtra("who","patient");
                             i.putExtra("name",name.getText());
                             i.putExtra("opp_id", modelArrayList.get(position).getId());
                             i.putExtra("status",modelArrayList.get(position).getStatus());

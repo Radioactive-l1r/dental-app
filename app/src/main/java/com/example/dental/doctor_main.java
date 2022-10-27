@@ -183,6 +183,7 @@ public class doctor_main extends AppCompatActivity
             holder.more.setOnClickListener(view -> {
 
                 Intent i = new Intent(doctor_main.this, doctor_diagnois.class);
+                i.putExtra("who","doctor");
                 i.putExtra("name", modelArrayList.get(position).getName());
                 i.putExtra("opp_id", modelArrayList.get(position).getId());
                 i.putExtra("status",modelArrayList.get(position).getStatus());
