@@ -72,7 +72,8 @@
             android:textStyle="bold"
             android:inputType="textEmailAddress"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"/>
+            app:layout_widthPercent="100%"
+            app:errorEnabled="true"/>
         <EditText
             android:id="@+id/password"
             android:layout_below="@+id/mail"
@@ -89,7 +90,9 @@
             android:textStyle="bold"
             android:inputType="textPassword"
             app:layout_heightPercent="7%"
-            app:layout_widthPercent="100%"/>
+            app:layout_widthPercent="100%"
+            app:passwordToggleEnabled="true"
+            app:errorEnabled="true"/>
         <TextView
             android:layout_below="@+id/password"
             android:id="@+id/sign_up"

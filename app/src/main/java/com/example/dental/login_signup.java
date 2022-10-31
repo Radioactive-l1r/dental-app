@@ -10,6 +10,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class login_signup extends AppCompatActivity {
 
@@ -33,6 +35,7 @@ public class login_signup extends AppCompatActivity {
     ArrayList<String> phone_list=new ArrayList<>();
     Map<String, String> ph_pas_map = new HashMap<>();
     Toast toast;
+    public static final Pattern PASS_PATT = Pattern.compile("^" + "(?=.*[0-9])" + "(?=.*[0-9])" + "(?=.*[a-zA-Z])" + "(?=.\\S+$)" + ".{6,}" + "$");
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -59,7 +62,7 @@ public class login_signup extends AppCompatActivity {
                 toast.show();
             }
             // doctor login
-            else if(phno_s.contains("0123456789") && password_s.contains("1234"))
+            else if(phno_s.equals("0123456789") && password_s.equals("1234"))
             {
                 startActivity(new Intent(getApplicationContext(), doctor_main.class));
                 overridePendingTransition(0,0);
@@ -137,15 +140,33 @@ public class login_signup extends AppCompatActivity {
                 toast.show();
             }
             else {
-                new bg("insert").execute();
-                d.dismiss();
-                toast = Toast.makeText(login_signup.this, "Sign Up Successful", Toast.LENGTH_SHORT);
-                toast.setGravity(Gravity.CENTER, 0, 0);
-                toast.show();
+                if(validate(mail, password)){
+                    new bg("insert").execute();
+                    d.dismiss();
+                    toast = Toast.makeText(login_signup.this, "Sign Up Successful", Toast.LENGTH_SHORT);
+                    toast.setGravity(Gravity.CENTER, 0, 0);
+                    toast.show();
+                }
             }
         });
 
         d.show();
+    }
+
+    private boolean validate(TextView mail, TextView password) {
+        String emailInput = mail.getText().toString().trim();
+        String passInput = password.getText().toString().trim();
+        if(!Patterns.EMAIL_ADDRESS.matcher(emailInput).matches()){
+            mail.setError("Invalid Email");
+            return false;
+        }else if(!PASS_PATT.matcher(passInput).matches()){
+            password.setError("Weak Password! Please use alphanumeric password");
+            return false;
+        }else{
+            password.setError(null);
+            return true;
+        }
+
     }
 
 
