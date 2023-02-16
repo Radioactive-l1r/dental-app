@@ -174,7 +174,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
             time_s  = time.getText().toString();
             problem_S = problem.getText().toString();
             problem_S = problem_S.replace("'", "''").replace("\n","_");
-            Toast.makeText(this, ""+problem_S, Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this, ""+problem_S, Toast.LENGTH_SHORT).show();
 
             if(TextUtils.isEmpty(date_S) || TextUtils.isEmpty(time_s) || TextUtils.isEmpty(problem_S))
             {

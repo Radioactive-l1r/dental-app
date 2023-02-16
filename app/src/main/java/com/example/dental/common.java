@@ -61,7 +61,7 @@ public class common {
         StrictMode.enableDefaults();
         try {
             HttpClient httpClient=new DefaultHttpClient();
-            String url="http://dentaldb.42web.io/sql.php?"+qry;
+            String url="https://orthoclue.000webhostapp.com/sql.php?"+qry;
             HttpPost httpPost=new HttpPost(url.replace(" ","%20").replace("'","%27"));
             HttpResponse response=httpClient.execute(httpPost);
             HttpEntity entity = response.getEntity();
@@ -77,7 +77,7 @@ public class common {
     public static void insert_diagnois(String img_data,String img_id)
     {
         HttpClient httpClient=new DefaultHttpClient();
-        HttpPost httpPost=new HttpPost("http://dentaldb.42web.io/sql_Img.php");
+        HttpPost httpPost=new HttpPost("https://orthoclue.000webhostapp.com/sql_Img.php");
 //        String result = "";
         try {
             List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);
