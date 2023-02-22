@@ -264,7 +264,7 @@ public class patient_main extends AppCompatActivity implements  DatePickerDialog
 
             if (action.contains("insert"))
             {
-                common.send_req("c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "')");
+                common.send_req("c_qry=insert into appointment(opp_id,name,phno,age_type,date_,time_,problem,d_advice,feedback,img,status) values ('"+opp_id_S+"','"+ names_S+"','"+number_s+"','"+age_type_S+"','"+date_S+"','"+time_s+"','"+problem_S+ "','','','','')");
             }
             if(action.contains("fetch"))
             {

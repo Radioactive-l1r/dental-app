@@ -77,7 +77,7 @@ public class common {
     public static void insert_diagnois(String img_data,String img_id)
     {
         HttpClient httpClient=new DefaultHttpClient();
-        HttpPost httpPost=new HttpPost("https://orthoclue.000webhostapp.com/sql_Img.php");
+        HttpPost httpPost=new HttpPost("https://orthoclue.000webhostapp.com/sql_img.php");
 //        String result = "";
         try {
             List<NameValuePair> nameValuePairs=new ArrayList<NameValuePair>(2);

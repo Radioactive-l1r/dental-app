@@ -229,7 +229,7 @@ public class patient_history extends AppCompatActivity
             holder.delete.setOnClickListener(view -> {
 
                 opp_id_s=modelArrayList.get(position).getId();
-                Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
+//                Toast.makeText(patient_history.this, ""+opp_id_s, Toast.LENGTH_SHORT).show();
                 //  modelArrayList.remove(position);
                 new bg("delete").execute();
             });
